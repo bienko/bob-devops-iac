@@ -1,0 +1,1689 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="DevOps Infrastructure as Code with IBM Bob">
+      
+      
+        <meta name="author" content="Christopher Bienko (cdbienko@us.ibm.com)">
+      
+      
+      
+        <link rel="prev" href="../1-2/">
+      
+      
+        <link rel="next" href="../2-2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Automated Deployment - DevOps Infrastructure as Code with IBM Bob</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../styles/override-print.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#automated-deployment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-header__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Infrastructure as Code with IBM Bob
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Automated Deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-nav__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    DevOps Infrastructure as Code with IBM Bob
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../toc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table of Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration and Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture and Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Enhancement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Deploy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Deploy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automated Deployment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automated Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL DEPLOY
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-pre-flight-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. PRE-FLIGHT CHECKS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ii. PRE-FLIGHT CHECKS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confirm-your-environment-variables-are-still-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm your environment variables are still set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirm-youre-in-the-right-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm you're in the right place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-pre-existing-host-breakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clear pre-existing host breakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-terraformtfvars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create terraform.tfvars
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-opening-bob-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. OPENING BOB SHELL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-the-deployment-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. THE DEPLOYMENT PROMPT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iv. THE DEPLOYMENT PROMPT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-prompt-walks-bob-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the prompt walks Bob through
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-expected-output-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. EXPECTED OUTPUT SHAPE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-if-the-run-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vi. IF THE RUN FAILS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vii. KEY TAKEAWAYS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Operate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Operate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring and Observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Healing and Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL DEPLOY
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-pre-flight-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. PRE-FLIGHT CHECKS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ii. PRE-FLIGHT CHECKS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confirm-your-environment-variables-are-still-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm your environment variables are still set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirm-youre-in-the-right-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm you're in the right place
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-pre-existing-host-breakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clear pre-existing host breakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-terraformtfvars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create terraform.tfvars
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-opening-bob-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. OPENING BOB SHELL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-the-deployment-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. THE DEPLOYMENT PROMPT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iv. THE DEPLOYMENT PROMPT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-prompt-walks-bob-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the prompt walks Bob through
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-expected-output-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. EXPECTED OUTPUT SHAPE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-if-the-run-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vi. IF THE RUN FAILS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vii. KEY TAKEAWAYS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><p><strong>MODULE 2 | DEPLOY</strong></p>
+<h1 id="automated-deployment"><strong>AUTOMATED DEPLOYMENT</strong></h1>
+<hr>
+<h2 id="i-what-you-will-deploy"><strong>i. WHAT YOU WILL DEPLOY</strong></h2>
+<p></p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls="" alt="type:video"><source src="../_videos/Deploy%20-%20Automated%20Deployment%20%5BBob%20DevOps%20L3%5D.mp4" type="video/mp4"></video></div><p></p>
+<div class="admonition quote">
+<p>Christopher Bienko <em>(AI Enablement GTM Product Manager)</em> provides an overview of the <em>Deploy - Automated Deployment</em> module for the hands-on enablement. <strong><a href="https://ibm.seismic.com/Link/Content/DCDq7gcDgHh7g89RhcP6VHg9cjdG" target="_blank">[1 min]</a></strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">AI MATURITY CURVE</p>
+<p>This module is delegation at its widest scope. A single prompt carries the entire deployment, and its constraints forbid Bob from editing the code that Module 1 already reviewed. Auto-approve stays off, so you gate the run at each step. The reach is far greater than anything in the previous course; the discipline is identical.</p>
+</div>
+<p>In this module you switch to <strong>Bob Shell</strong> and let <strong>one prompt</strong> deploy the whole platform onto the remote Ubuntu server.</p>
+<p><strong>Key idea:</strong> The remote host has <strong>no public web ports</strong>. Every container binds to <code>127.0.0.1</code> on the server. The operator reaches everything through <strong>SSH local-forward tunnels</strong> opened by Bob Shell, hitting <code>http://localhost:&lt;port&gt;</code> on the laptop.</p>
+<hr>
+<h2 id="ii-pre-flight-checks"><strong>ii. PRE-FLIGHT CHECKS</strong></h2>
+<hr>
+<h3 id="confirm-your-environment-variables-are-still-set"><strong>Confirm your environment variables are still set</strong></h3>
+<p>Both pre-flight steps are terminal commands rather than prompts: run them in the <strong>Bob IDE terminal</strong>, the same one you used in Setup. Bob Shell only comes into play in the next section, when you paste the deployment prompt.</p>
+<p>This module uses the same five environment variables you exported in <a href="../setup/#set-environment-variables" target="_blank">Setup → Environment Configuration</a>. Confirm they are still set:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"HOST=</span><span class="nv">$TARGET_HOST</span><span class="s2">  USER=</span><span class="nv">$SSH_USER</span><span class="s2">  PORT=</span><span class="nv">$SSH_PORT</span><span class="s2">  KEY=</span><span class="nv">$SSH_KEY</span><span class="s2">"</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$TF_VAR_grafana_admin_password</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"grafana password: set"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"grafana password: MISSING"</span>
+</code></pre></div>
+<p>Every value should print. If it does, continue to the next check.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: A VALUE PRINTS BLANK OR <code>MISSING</code></summary>
+<p>Environment variables only exist inside the shell session that exported them. If you closed the terminal or Bob IDE since Setup, or are starting Part 2 on another day, they are gone. Re-export them before continuing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TARGET_HOST</span><span class="o">=[</span>paste<span class="w"> </span>public<span class="w"> </span>IP<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_USER</span><span class="o">=[</span>paste<span class="w"> </span>SSH<span class="w"> </span>username<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_PORT</span><span class="o">=[</span>paste<span class="w"> </span>SSH<span class="w"> </span>port<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_KEY</span><span class="o">=[</span>paste<span class="w"> </span>path<span class="w"> </span>to<span class="w"> </span>SSH<span class="w"> </span>key<span class="w"> </span>file<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_VAR_grafana_admin_password</span><span class="o">=</span><span class="s1">'[type the same Grafana password as in Setup]'</span>
+</code></pre></div>
+<p>As a reminder of where each value lives:</p>
+<ul>
+<li><code>TARGET_HOST</code>, <code>SSH_USER</code>, <code>SSH_PORT</code>: on your <strong>TechZone reservation page</strong> (My reservations → your reservation)</li>
+<li><code>SSH_KEY</code>: the path to the <code>.pem</code> file you downloaded into the lab folder</li>
+<li><code>TF_VAR_grafana_admin_password</code>: use the <strong>same password</strong> as in Setup. If the platform was already deployed once with a different password, Grafana keeps the old one and your login fails later.</li>
+</ul>
+</details>
+<hr>
+<h3 id="confirm-youre-in-the-right-place"><strong>Confirm you're in the right place</strong></h3>
+<p>Paste this block into the Bob IDE terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">pwd</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ls<span class="w"> </span>infra/
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>terraform<span class="w"> </span>-version
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ansible<span class="w"> </span>--version
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">BatchMode</span><span class="o">=</span>yes<span class="w"> </span>-o<span class="w"> </span><span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s1">'sudo -n true &amp;&amp; echo sudo-ok'</span>
+</code></pre></div>
+<p>Check the output of each command:</p>
+<ul>
+<li><code>pwd</code>: prints your lab folder, the project root from Module 1</li>
+<li><code>ls infra/</code>: lists the two directories Bob generated, <code>ansible</code> and <code>terraform</code></li>
+<li><code>terraform -version</code> and <code>ansible --version</code>: each prints a version number</li>
+<li>the <code>ssh</code> command: prints <code>sudo-ok</code>, which proves you can reach the server and run sudo without a password</li>
+</ul>
+<p>If all of that checks out, you are ready to deploy. If the last command does not print <code>sudo-ok</code>, return to <a href="../setup/" target="_blank">Setup</a> and fix the SSH connection first.</p>
+<hr>
+<h3 id="clear-pre-existing-host-breakage"><strong>Clear pre-existing host breakage</strong></h3>
+<p>TechZone Ubuntu images frequently arrive with a half-configured <code>shim-signed</code> package. Its post-install script tries to mount an EFI partition that does not exist on a cloud VM, so it fails on <strong>every</strong> apt operation. Ansible then cannot install the packages Rancher Desktop needs, its service never starts, and you end up debugging two failures that look like one.</p>
+<p>Thirty seconds spent now avoids all of it. Run this before you deploy:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s1">'</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s1">  sudo dpkg --configure -a</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="s1">  sudo apt-get install -f -y</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s1">  sudo dpkg --audit</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s1">  echo "dpkg state: clean"</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s1">'</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">NEVER REMOVE <code>shim-signed</code></p>
+<p>It is a protected, boot-critical package and <code>dpkg</code> refuses to remove it. It is also entirely unrelated to Rancher Desktop. <code>dpkg --configure -a</code> completes its configuration and clears the error state, and that alone is the fix.</p>
+<p>You need not check for Rancher Desktop on the server. Ansible installs it in the next section if it is missing.</p>
+</div>
+<p><code>dpkg --audit</code> printing nothing before <code>dpkg state: clean</code> means the package manager is healthy and the deployment will run straight through. This is idempotent — on a host that was already fine it changes nothing.</p>
+<hr>
+<h3 id="create-terraformtfvars"><strong>Create <code>terraform.tfvars</code></strong></h3>
+<p>Module 1 generated <code>infra/terraform/terraform.tfvars.example</code>, a template rather than the real file. Terraform needs the real one. Four variables have no default (<code>target_host</code>, <code>ssh_user</code>, <code>ssh_private_key_path</code>, <code>domain</code>), and <code>ssh_port</code> defaults to <code>22</code> rather than your TechZone port.</p>
+<p>Your <code>TARGET_HOST</code> and <code>SSH_USER</code> exports do not help here: Terraform reads <strong>only</strong> environment variables prefixed <code>TF_VAR_</code>, which is why <code>TF_VAR_grafana_admin_password</code> is the one that works without a file. Without this step, <code>terraform apply</code> stops to prompt for four values and the non-interactive Bob Shell run fails partway through.</p>
+<p>Paste this in the Bob IDE terminal, from the lab folder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>infra/terraform/terraform.tfvars<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s">target_host          = "$TARGET_HOST"</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s">ssh_user             = "$SSH_USER"</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s">ssh_port             = $SSH_PORT</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s">ssh_private_key_path = "$(cd "$(dirname "$SSH_KEY")" &amp;&amp; pwd)/$(basename "$SSH_KEY")"</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s">domain               = "localhost"</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s">grafana_admin_user   = "labadmin"</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s">EOF</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>cat<span class="w"> </span>infra/terraform/terraform.tfvars
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title"><code>terraform.tfvars</code> IS SECRET-ADJACENT — NEVER COMMIT IT</p>
+<p>It carries your server address, SSH user and key path. Module 1 Step D generated a gitignore template covering it; confirm <code>terraform.tfvars</code> is listed there before any <code>git add</code>.</p>
+</div>
+<p>Read back what it printed. Three things must be right:</p>
+<ul>
+<li><strong><code>grafana_admin_password</code> is absent.</strong> It stays in <code>TF_VAR_grafana_admin_password</code> so your password never lands on disk. Do not add it here.</li>
+<li><strong><code>ssh_private_key_path</code> is absolute.</strong> Terraform runs from <code>infra/terraform/</code>, so a relative <code>./key.pem</code> resolves to the wrong place and the provider cannot reach the Rancher socket on the remote host.</li>
+<li><strong><code>domain</code> is <code>localhost</code>.</strong> You arrive through an SSH tunnel as <code>localhost</code>, and a real domain in a Traefik <code>Host()</code> rule matches nothing — you would get a 404 from a stack whose containers all look healthy.</li>
+</ul>
+<hr>
+<h2 id="iii-opening-bob-shell"><strong>iii. OPENING BOB SHELL</strong></h2>
+<ol>
+<li>
+<p>In the Bob IDE terminal where you just ran the pre-flight (the same session, so Bob Shell inherits your five environment variables), type <code>bob</code> and press <span class="keys"><kbd class="key-enter">Enter</kbd></span>:</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/01bc4268-f7fe-4b08-a14e-2ae884e6066f/user_cropped_screenshot_bae53af29a964a36a05c056fd7121f12_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/01bc4268-f7fe-4b08-a14e-2ae884e6066f/user_cropped_screenshot_bae53af29a964a36a05c056fd7121f12_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>
+<p>The Bob Shell banner appears and the input field at the bottom is ready for a prompt. Before continuing, glance at two things: the path under the banner should be your lab folder, and the status bar at the bottom shows the mode and token meter you will watch during the run.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/ddfff18d-ebf9-4503-aa49-579df0cd824d/user_cropped_screenshot_cd7e6fd0bca246de8ef65d506b9a349e_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/ddfff18d-ebf9-4503-aa49-579df0cd824d/user_cropped_screenshot_cd7e6fd0bca246de8ef65d506b9a349e_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h2 id="iv-the-deployment-prompt"><strong>iv. THE DEPLOYMENT PROMPT</strong></h2>
+<p>Use the prompt below <strong>exactly</strong> in Bob Shell. If your CLI supports context attachment, attach the inventory using <code>@infra/ansible/inventory.ini</code>. There is neither a <code>make deploy</code> target nor a wrapper script; the prompt itself performs the deployment.</p>
+<div class="admonition info">
+<p class="admonition-title">LAUNCH BOB SHELL FROM THE BOB IDE TERMINAL</p>
+<p>Start Bob Shell in the same terminal session you just ran the pre-flight in, so it inherits your five environment variables. The prompt below references <code>${TARGET_HOST}</code>, <code>${SSH_KEY}</code> and the rest; in a fresh session those are empty and the run fails at the first step.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">THE <code>${...}</code> PLACEHOLDERS STAY UNEXPANDED, AND THAT IS EXPECTED</p>
+<p>Exporting a variable makes it available to programs Bob runs. It does not rewrite text you paste. A shell only expands <code>${TARGET_HOST}</code> when the shell itself reads the line, and pasting into Bob's input box is not that, so Bob receives the literal characters <code>${TARGET_HOST}</code>.</p>
+<p>That is why the first instruction in the prompt tells Bob to read the values out of its own environment. Without it, Bob sees a template full of blanks. It then stops halfway through the run to ask you for the host, the user, the port, and the key path.</p>
+</div>
+<p>The prompt pins everything down. It specifies which key and port every call must use, the exact steps in order, the hard constraints, and what to report back. That precision is what makes the run repeatable, and it is the run from which the expected output (below) was produced.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>You are an agentic DevOps assistant operating inside this repository.
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Goal: deploy and validate the full containerized web platform on a remote Ubuntu host that exposes ONLY SSH. All web access is via SSH local-forward tunnels from my laptop - no public ports are opened on the cloud side.
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>The ${...} placeholders below arrive as literal text, because pasting into a chat box does not expand shell variables. The values are exported in the environment you inherited, so read them yourself first and never ask me to re-type them:
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    env | grep -E '^(TARGET_HOST|SSH_USER|SSH_PORT|SSH_KEY)='
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    test -n "$TF_VAR_grafana_admin_password" &amp;&amp; echo "grafana password: set" || echo "grafana password: MISSING"
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>That must print four lines plus "set". If anything is missing, stop and say which.
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>Context:
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>- Target host: ${TARGET_HOST}
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>- SSH user:    ${SSH_USER}
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>- SSH port:    ${SSH_PORT}
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>- SSH key:     ${SSH_KEY}    (already chmod 600)
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>- Terraform:   infra/terraform/
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>- Ansible:     infra/ansible/
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>- Inventory:   infra/ansible/inventory.ini
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>All ssh / scp / rsync calls MUST use `-i ${SSH_KEY} -p ${SSH_PORT}`.
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>All ansible calls MUST pass `--private-key "${SSH_KEY}"`, always double-quoted (do NOT rely on `ansible_ssh_private_key_file` in the inventory - relative paths there resolve from cwd, which breaks when ansible is invoked from the project root). Quote every path you interpolate: the lab folder may contain spaces, and an unquoted one splits into separate arguments, producing "no such identity: /Users/you/Documents/IBM".
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>The Terraform docker provider host MUST be `ssh://${SSH_USER}@${TARGET_HOST}:${SSH_PORT}` using the same key, with `IdentitiesOnly=yes` in `ssh_opts`. Either host-key posture is correct: `StrictHostKeyChecking=accept-new` with a real `UserKnownHostsFile` (what Step D hardens it to) or `=no` with `/dev/null`. Never `=yes` — this run is unattended. Only report and stop if the host, port, user or key is wrong.
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>Required steps:
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>1) Pre-flight
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>   - `ssh -i ${SSH_KEY} -p ${SSH_PORT} ${SSH_USER}@${TARGET_HOST} 'sudo -n true'` must succeed.
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>   - Run `terraform fmt -check`, `terraform validate`, `ansible-lint`. Stop on any error.
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>2) Bootstrap (Ansible - host preparation)
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>   - cd infra/ansible
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>   - ansible-playbook -i inventory.ini site.yml --tags bootstrap
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>   - This must: install Rancher Desktop headless if missing, run it under systemd, expose its socket at /var/run/docker.sock, mount /opt/lab into the Rancher Desktop VM so bind mounts resolve, add ${SSH_USER} to the docker group if the socket needs it and refresh the SSH session group membership, configure log rotation.
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>   - Verify with: `ssh -i ${SSH_KEY} -p ${SSH_PORT} ${SSH_USER}@${TARGET_HOST} 'docker ps'`
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>3) Provision (Terraform)
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>   - cd infra/terraform
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>   - terraform init
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>   - terraform plan -out tfplan and summarise what will be created
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>   - terraform apply tfplan
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>   - Confirm every container `ports` block uses `ip = "127.0.0.1"`. Fail loudly if any is on 0.0.0.0.
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>   - Confirm every bind-mount source is an absolute directory under /opt/lab on the remote host. If one names a file (index.html, prometheus.yml) or uses path.module, stop and report it: Docker creates a missing file source as a directory of that name and the container dies with "not a directory". That is a Part 1 defect, not something to patch here.
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>   - Run `terraform output` and capture the values it prints; use those URLs in step 8 rather than re-typing them from this prompt.
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>4) Configure (Ansible - content)
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>   - cd infra/ansible
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>   - ansible-playbook -i inventory.ini site.yml --tags content
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>   - Re-run with `--check --diff` and confirm 0 changed (idempotency proof).
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>5) Open SSH tunnels (in the background, from this laptop)
+<a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>   - Start a single multiplexed ssh session that forwards:
+<a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>       8080 -&gt; 127.0.0.1:80           (app via Traefik)
+<a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>       8081 -&gt; 127.0.0.1:8080         (Traefik dashboard)
+<a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>       3000 -&gt; 127.0.0.1:3000         (Grafana)
+<a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>       9090 -&gt; 127.0.0.1:9090         (Prometheus)
+<a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a>   - Command, writing the PID to /tmp/lab-tunnel.pid so step 8 can kill it:
+<a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a>       ssh -i ${SSH_KEY} -p ${SSH_PORT} -fN -o ExitOnForwardFailure=yes \
+<a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a>           -L 8080:127.0.0.1:80 \
+<a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a>           -L 8081:127.0.0.1:8080 \
+<a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a>           -L 3000:127.0.0.1:3000 \
+<a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a>           -L 9090:127.0.0.1:9090 \
+<a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a>           ${SSH_USER}@${TARGET_HOST}
+<a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a>       pgrep -f "ssh.*-L 8080:127.0.0.1:80.*${TARGET_HOST}" &gt; /tmp/lab-tunnel.pid
+<a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a>   - Wait up to 5 seconds for the forwards to be ready.
+<a id="__codelineno-5-66" name="__codelineno-5-66" href="#__codelineno-5-66"></a>
+<a id="__codelineno-5-67" name="__codelineno-5-67" href="#__codelineno-5-67"></a>6) Validate (everything via localhost)
+<a id="__codelineno-5-68" name="__codelineno-5-68" href="#__codelineno-5-68"></a>   - curl -fsS http://localhost:8080/             -&gt; 200, body contains "Welcome"
+<a id="__codelineno-5-69" name="__codelineno-5-69" href="#__codelineno-5-69"></a>   - curl -fsS http://localhost:8081/api/overview -&gt; 200 (Traefik API)
+<a id="__codelineno-5-70" name="__codelineno-5-70" href="#__codelineno-5-70"></a>   - curl -fsS http://localhost:3000/api/health   -&gt; 200 (Grafana)
+<a id="__codelineno-5-71" name="__codelineno-5-71" href="#__codelineno-5-71"></a>   - curl -fsS http://localhost:9090/-/healthy    -&gt; 200 (Prometheus)
+<a id="__codelineno-5-72" name="__codelineno-5-72" href="#__codelineno-5-72"></a>   - List the running containers on the remote host:
+<a id="__codelineno-5-73" name="__codelineno-5-73" href="#__codelineno-5-73"></a>     `ssh -i ${SSH_KEY} -p ${SSH_PORT} ${SSH_USER}@${TARGET_HOST} \
+<a id="__codelineno-5-74" name="__codelineno-5-74" href="#__codelineno-5-74"></a>         "docker ps --format '{{.Names}} {{.Status}} {{.Ports}}'"`
+<a id="__codelineno-5-75" name="__codelineno-5-75" href="#__codelineno-5-75"></a>   - Confirm every published port is `127.0.0.1:&lt;port&gt;-&gt;...`, never `0.0.0.0:`.
+<a id="__codelineno-5-76" name="__codelineno-5-76" href="#__codelineno-5-76"></a>   - Open Grafana's dashboard list via the API and confirm exactly one dashboard is provisioned, then query Prometheus for every metric its panels reference and report any that returns no series. A healthy container and an HTTP 200 do not prove a panel has data behind it.
+<a id="__codelineno-5-77" name="__codelineno-5-77" href="#__codelineno-5-77"></a>
+<a id="__codelineno-5-78" name="__codelineno-5-78" href="#__codelineno-5-78"></a>7) Self-healing demo (60 seconds)
+<a id="__codelineno-5-79" name="__codelineno-5-79" href="#__codelineno-5-79"></a>   IMPORTANT: do NOT use `docker stop` or `docker kill` from outside - Docker treats those as
+<a id="__codelineno-5-80" name="__codelineno-5-80" href="#__codelineno-5-80"></a>   a deliberate user stop and `restart: always` will not fire. To prove real self-healing,
+<a id="__codelineno-5-81" name="__codelineno-5-81" href="#__codelineno-5-81"></a>   crash the application process from INSIDE the container so the exit looks unexpected to
+<a id="__codelineno-5-82" name="__codelineno-5-82" href="#__codelineno-5-82"></a>   the daemon. This requires `init = true` on the container (set in Part 1 Step B) so PID 1
+<a id="__codelineno-5-83" name="__codelineno-5-83" href="#__codelineno-5-83"></a>   is `tini` and the application is PID 2+ - Linux protects PID 1 from SIGKILL inside its
+<a id="__codelineno-5-84" name="__codelineno-5-84" href="#__codelineno-5-84"></a>   own PID namespace, so without tini, killing the in-container app from within is a no-op.
+<a id="__codelineno-5-85" name="__codelineno-5-85" href="#__codelineno-5-85"></a>
+<a id="__codelineno-5-86" name="__codelineno-5-86" href="#__codelineno-5-86"></a>   - Capture before:  `ssh ... docker inspect apache_web -f '{{.State.StartedAt}} restartCount={{.RestartCount}}'`
+<a id="__codelineno-5-87" name="__codelineno-5-87" href="#__codelineno-5-87"></a>   - Crash:           `ssh ... "docker exec apache_web sh -c 'kill -9 \$(pidof httpd | tr \" \" \"\\n\" | sort -n | head -1)'"`
+<a id="__codelineno-5-88" name="__codelineno-5-88" href="#__codelineno-5-88"></a>   - Wait 8-12 seconds.
+<a id="__codelineno-5-89" name="__codelineno-5-89" href="#__codelineno-5-89"></a>   - Capture after:   same inspect - `restartCount` must increment by 1 and `StartedAt` must be newer.
+<a id="__codelineno-5-90" name="__codelineno-5-90" href="#__codelineno-5-90"></a>   - Re-curl http://localhost:8080/ - must return 200 again automatically.
+<a id="__codelineno-5-91" name="__codelineno-5-91" href="#__codelineno-5-91"></a>   - Print the exact crash command you ran. If it contains `docker stop` or `docker kill`, the demo did not prove anything and you must report it as failed.
+<a id="__codelineno-5-92" name="__codelineno-5-92" href="#__codelineno-5-92"></a>
+<a id="__codelineno-5-93" name="__codelineno-5-93" href="#__codelineno-5-93"></a>8) Print the operator URLs and how to tear down
+<a id="__codelineno-5-94" name="__codelineno-5-94" href="#__codelineno-5-94"></a>   - Print:
+<a id="__codelineno-5-95" name="__codelineno-5-95" href="#__codelineno-5-95"></a>       App        : http://localhost:8080
+<a id="__codelineno-5-96" name="__codelineno-5-96" href="#__codelineno-5-96"></a>       Traefik UI : http://localhost:8081
+<a id="__codelineno-5-97" name="__codelineno-5-97" href="#__codelineno-5-97"></a>       Grafana    : http://localhost:3000   (&lt;grafana_admin_user&gt; / &lt;masked&gt;)
+<a id="__codelineno-5-98" name="__codelineno-5-98" href="#__codelineno-5-98"></a>       Prometheus : http://localhost:9090
+<a id="__codelineno-5-99" name="__codelineno-5-99" href="#__codelineno-5-99"></a>   - Print the kill command for the tunnel:
+<a id="__codelineno-5-100" name="__codelineno-5-100" href="#__codelineno-5-100"></a>       kill $(cat /tmp/lab-tunnel.pid)   # or: pkill -f 'ssh.*-L 8080:127.0.0.1:80'
+<a id="__codelineno-5-101" name="__codelineno-5-101" href="#__codelineno-5-101"></a>
+<a id="__codelineno-5-102" name="__codelineno-5-102" href="#__codelineno-5-102"></a>Constraints:
+<a id="__codelineno-5-103" name="__codelineno-5-103" href="#__codelineno-5-103"></a>- Do NOT modify Terraform or Ansible code; only run it. If something is broken, report the file, the defect and the fix, and stop.
+<a id="__codelineno-5-104" name="__codelineno-5-104" href="#__codelineno-5-104"></a>- That no-edit rule covers the repository only, never the server. If the host arrives already broken - dpkg/apt failing to configure a pre-existing package, a systemd unit in a failed state, the rdd unit hitting its start limit - repairing the host is expected: fix it, state exactly what you ran and why, and continue.
+<a id="__codelineno-5-105" name="__codelineno-5-105" href="#__codelineno-5-105"></a>- These are two separate host failures; fixing apt does not fix the second. If the rdd unit is in a failed state after a bad apt run, that is a start-limit rather than a package problem: run `systemctl reset-failed rdd.service`, then `systemctl start rdd.service`. There is no `docker.service` or `docker.socket` on this host - rdd is not socket-activated - so do not try to start them. Never remove or force-reinstall `shim-signed` - it is boot-critical, dpkg refuses it, and it is unrelated to the container engine.
+<a id="__codelineno-5-106" name="__codelineno-5-106" href="#__codelineno-5-106"></a>- Do NOT place configuration on the host by hand. No scp of templates, no rendering files into /tmp, no editing anything under /opt/lab over ssh. Every file on that server must arrive through the Ansible playbook. If a play fails, report the failure and stop; a hand-placed file is invisible to `--check` and destroys the idempotency proof this lab exists to demonstrate.
+<a id="__codelineno-5-107" name="__codelineno-5-107" href="#__codelineno-5-107"></a>- If the playbook appears to hang, do NOT work around it. Stop and check the inventory first: run `ansible-inventory --list` from infra/ansible. A parse failure there makes Ansible fall back to implicit localhost, and every subsequent task silently targets the laptop instead of the server.
+<a id="__codelineno-5-108" name="__codelineno-5-108" href="#__codelineno-5-108"></a>- Never echo TF_VAR_grafana_admin_password to stdout; mask it.
+<a id="__codelineno-5-109" name="__codelineno-5-109" href="#__codelineno-5-109"></a>- If any step fails, stop and print the failing command, the last 30 lines of output, and the proposed remediation.
+<a id="__codelineno-5-110" name="__codelineno-5-110" href="#__codelineno-5-110"></a>- Never bind any container to 0.0.0.0. The whole point of this lab is the tunnel-only access model.
+<a id="__codelineno-5-111" name="__codelineno-5-111" href="#__codelineno-5-111"></a>- A deliverable you cannot produce is a failure, not a skip. Never substitute a different proof for a missing one: a clean terraform plan says nothing about Ansible idempotency.
+<a id="__codelineno-5-112" name="__codelineno-5-112" href="#__codelineno-5-112"></a>
+<a id="__codelineno-5-113" name="__codelineno-5-113" href="#__codelineno-5-113"></a>Deliverables:
+<a id="__codelineno-5-114" name="__codelineno-5-114" href="#__codelineno-5-114"></a>- Summarised bootstrap / plan / apply / play log
+<a id="__codelineno-5-115" name="__codelineno-5-115" href="#__codelineno-5-115"></a>- Final localhost URLs the operator can open in a browser
+<a id="__codelineno-5-116" name="__codelineno-5-116" href="#__codelineno-5-116"></a>- Idempotency proof (Ansible second run = 0 changed, terraform plan = no changes)
+<a id="__codelineno-5-117" name="__codelineno-5-117" href="#__codelineno-5-117"></a>- Self-healing proof (container down -&gt; back up automatically)
+<a id="__codelineno-5-118" name="__codelineno-5-118" href="#__codelineno-5-118"></a>- Tear-down command for the SSH tunnel
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">THE CONSTRAINTS ARE THE CONTRACT</p>
+<p>The prompt never lets the agent edit code. Module 1 already generated and reviewed it; this prompt only <em>runs</em> it. If a step fails, the agent must stop and report rather than improvise a fix.</p>
+</div>
+<p>Pasted into Bob Shell, the input field grows to hold the whole prompt. Check the bottom bar before you hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>: <strong>Auto-approve Off</strong> (you gate the run) and the token meter showing plenty of headroom:</p>
+<p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/31aca36f-dc36-4c80-a332-e1df34bc62a2/sps-redacted-7ae9b15e01564d738cdd585c717de3ca_14457d55bd9f4e9ebcb94dcf5d3ebc00_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/31aca36f-dc36-4c80-a332-e1df34bc62a2/sps-redacted-7ae9b15e01564d738cdd585c717de3ca_14457d55bd9f4e9ebcb94dcf5d3ebc00_text_export.jpeg" alt="" width="600"></a>
+</p>
+
+<hr>
+<h3 id="what-the-prompt-walks-bob-through"><strong>What the prompt walks Bob through</strong></h3>
+<p>The prompt walks Bob through eight phases:</p>
+<ol>
+<li>ssh-check the remote host (custom port, key auth, passwordless sudo)</li>
+<li><code>ansible-playbook</code> to bootstrap the host (install Rancher Desktop if missing, grant socket access)</li>
+<li><code>terraform init</code> / <code>plan</code> / <code>apply</code> against the remote Rancher socket over SSH</li>
+<li><code>ansible-playbook</code> again for content (vhosts, dashboards, scrape configs)</li>
+<li>open the <strong>SSH tunnels</strong> for app/Traefik/Grafana/Prometheus</li>
+<li>curl every <code>localhost:&lt;port&gt;</code> and confirm 200 / healthchecks</li>
+<li>run a 60-second self-healing demo (kill a container, watch it come back)</li>
+<li>print the final <strong>localhost URLs</strong> the operator can open in a browser</li>
+</ol>
+<p>The next section shows what that looks like when it runs.</p>
+<hr>
+<h2 id="v-expected-output-shape"><strong>v. EXPECTED OUTPUT SHAPE</strong></h2>
+<p>When Bob Shell finishes the prompt, it reports a <strong>Deployment Complete</strong> checklist shaped like this (with the exact wording and counts depending on your host and image tags):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Deployment Complete — Containerized Web Platform
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Summary
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Successfully deployed and validated the full containerized web platform
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>on the remote host with tunnel-only access (no public ports).
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>Deployment Steps Completed
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>1. Pre-flight Checks ✓
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>   - SSH sudo access confirmed
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>   - Terraform fmt/validate passed
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>   - Ansible-lint passed (warnings non-blocking)
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>2. Bootstrap ✓
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>   - Container engine present on the host (Rancher Desktop, installed via Ansible when missing)
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>3. Terraform Provision ✓
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>   - Plan applied, all containers up to date
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>   - Security verified: all ports bound to 127.0.0.1 only (no 0.0.0.0)
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>4. Ansible Configure ✓
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>   - Deployed web content, monitoring configs
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>   - Idempotency verified: re-run with --check --diff = 0 changes
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>5. SSH Tunnels ✓
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>   - Established multiplexed SSH session (PID printed)
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>   - Forwarding: 8080-&gt;80, 8081-&gt;8080, 3000-&gt;3000, 9090-&gt;9090
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>6. Validation ✓
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>   - App (via Traefik): HTTP 200
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>   - Grafana: HTTP 200 (with auth)
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>   - Prometheus: HTTP 200
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>   - Traefik Dashboard: HTTP 200
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">GRAFANA LOGIN IS <code>labadmin</code></p>
+<p>Log in with <strong><code>labadmin</code></strong> and your <code>TF_VAR_grafana_admin_password</code>. Module 1 set the username to <code>labadmin</code> rather than the default <code>admin</code>. Bob prints it in the operator card if you forget.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">THE TRAEFIK DASHBOARD SHOULD NOT ASK YOU TO LOG IN</p>
+<p>It answers <strong>HTTP 200</strong> with no credentials. That is the accepted risk recorded in Module 1: the dashboard is reachable only through your own SSH tunnel, so it carries no auth. If your run reports <strong>401</strong> instead, the Step D audit put a BasicAuth middleware in front of it despite the accepted-risks block, and the password is a hash only Bob has seen. Re-check the accepted risks in <a href="../1-1/#v-step-d-security-secrets-review" target="_blank">Step D</a> and remove the middleware before continuing.</p>
+</div>
+<p>The exact wording and numbers (recap counts, PIDs) will differ from run to run. What must hold on every run is fixed, however. Pre-flight passes. Every port binds only to <code>127.0.0.1</code>. The <code>--check</code> re-run reports <code>changed=0</code>, and every service answers through its tunnel.</p>
+<p>Here is the checklist as Bob Shell prints it:</p>
+<p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/9cd07a86-5ee4-4792-b86a-d047c8bfde84/user_cropped_screenshot_f7120f0a8eb24a7db93f737dc1dee535_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/9cd07a86-5ee4-4792-b86a-d047c8bfde84/user_cropped_screenshot_f7120f0a8eb24a7db93f737dc1dee535_text_export.jpeg" alt="" width="600"></a>
+</p>
+
+<p>Below the checklist comes the operator card, which is the part you use next. It lists every URL to open from your laptop and the Grafana login. It also carries the tear-down commands for both the tunnel and the whole stack, along with the running container count (six here: traefik, apache_web, prometheus, grafana, plus the Loki and Promtail additions from Module 1):</p>
+<p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/ced81150-1e0f-4710-9e2d-96b58f4b4bff/user_cropped_screenshot_99ceeda20dbb41cb99776756c31b2cc9_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/ced81150-1e0f-4710-9e2d-96b58f4b4bff/user_cropped_screenshot_99ceeda20dbb41cb99776756c31b2cc9_text_export.jpeg" alt="" width="600"></a>
+</p>
+
+<hr>
+<h2 id="vi-if-the-run-fails"><strong>vi. IF THE RUN FAILS</strong></h2>
+<p>Each dropdown below is a real failure this deployment can produce, matched to the step that triggers it. Expand the one that matches your symptom.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: Ansible run fails on <code>dpkg returned an error code (1)</code> or Rancher Desktop will not start</summary>
+<p><strong>Cause</strong> — the server arrived broken; nothing in your code is at fault. TechZone Ubuntu images sometimes ship with a half-configured <code>shim-signed</code> package whose post-install script tries to mount an EFI partition that does not exist on the VM. It exits non-zero on <strong>every</strong> apt operation, so the Rancher Desktop install fails. Systemd then retries its unit until it trips its start limit and refuses to come up at all, which is a second, separate failure you must clear even after apt is healthy.</p>
+<p><strong>Fix</strong> — repair the host, then re-run the play. This is host state rather than repository code, so fixing it does not break the "only run it" constraint:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s1">'</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s1">  sudo sed -i "2i exit 0" /var/lib/dpkg/info/shim-signed.postinst</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s1">  sudo dpkg --configure -a</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s1">  sudo apt-get install -f -y</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s1">  sudo systemctl reset-failed rdd.service</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s1">  sudo systemctl start rdd.service</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s1">  systemctl is-active rdd</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s1">'</span>
+</code></pre></div>
+<p>The last line must print <code>active</code>. The <code>exit 0</code> neutralises the bootloader-signing hook, which this lab never uses — nothing else on the host depends on it.</p>
+</details>
+<details class="warning">
+<summary>FIRST: DIAGNOSTICS AT A GLANCE</summary>
+<p>Before chasing a specific symptom, establish the state of the platform:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># What is running on the host? (expect: traefik, apache_web, prometheus, grafana, loki, promtail)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"docker ps --format '{{.Names}} {{.Status}} {{.Ports}}'"</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Recent logs from a container</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"docker logs traefik --tail 50"</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># What is bound where on the host: every line must show 127.0.0.1, never 0.0.0.0</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"ss -tlnp | grep -E ':(80|3000|8080|9090)'"</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># Are the SSH tunnels up on the laptop?</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'ssh.*-L'</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="c1"># Does the app answer through the tunnel?</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>curl<span class="w"> </span>-v<span class="w"> </span>http://localhost:8080/
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>STEP 1: BOB STOPS AND ASKS YOU FOR THE HOST, USER, PORT OR KEY PATH</summary>
+<p><strong>Cause</strong>: Bob is reading <code>${TARGET_HOST}</code> and friends as literal text. Pasting into a chat box never expands shell variables, no matter what you exported beforehand. Either the prompt's opening "resolve your own context" block was trimmed off the paste, or the variables really are missing from Bob's environment.</p>
+<p><strong>Fix</strong>: Tell Bob to look them up itself rather than answering by hand, so the values come from the same place every later command uses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Do not ask me for those values. Read them from your own environment first:
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>env | grep -E '^(TARGET_HOST|SSH_USER|SSH_PORT|SSH_KEY)='
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Then continue from step 1.
+</code></pre></div>
+<p>If that prints empty values, Bob Shell was not launched from the terminal where you exported them. Quit Bob Shell, re-export the five variables in the Bob IDE terminal, and start <code>bob</code> again from that same session.</p>
+<p>Typing the values into the chat instead works for the current run, but only for the parts Bob types by hand. Any command it writes with a bare <code>${SSH_KEY}</code> still resolves against the empty environment, which is why this shows up later as <code>Permission denied (publickey)</code>.</p>
+</details>
+<details class="warning">
+<summary>STEP 2: <code>permission denied while trying to connect to the Docker daemon socket</code></summary>
+<p><strong>Cause</strong>: The SSH user is not in the <code>docker</code> group. Or it is, but the SSH session was opened <em>before</em> the group was added, so the session has not picked up the new membership.</p>
+<p><strong>Fix</strong>: The bootstrap step adds the user to the <code>docker</code> group; after that, <strong>the SSH session must be re-established</strong>. Disconnect and reconnect, or have Ansible run <code>meta: reset_connection</code> right after the group change. Then verify:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"id | grep docker &amp;&amp; docker ps"</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>STEP 3: <code>Error: Cannot connect to the Docker daemon</code></summary>
+<p><strong>Cause</strong>: Terraform's docker provider cannot reach the remote Docker daemon over SSH.</p>
+<p><strong>Fix</strong>: Verify direct access first:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span>docker<span class="w"> </span>ps
+</code></pre></div>
+<p>If that fails, Rancher Desktop is not usable on the host yet; re-run the bootstrap step (<code>ansible-playbook -i inventory.ini site.yml --tags bootstrap</code>). If it works, check the provider configuration: the host must be <code>ssh://${SSH_USER}@${TARGET_HOST}:${SSH_PORT}</code>, with <code>ssh_opts = ["-i", "&lt;key&gt;"]</code> if your key is not in <code>~/.ssh/</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kr">provider</span><span class="w"> </span><span class="nv">"docker"</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ssh://${var.ssh_user}@${var.target_host}:${var.ssh_port}"</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="na">ssh_opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="nv">var.ssh_private_key_path</span><span class="p">,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="s2">"-o", "StrictHostKeyChecking=no"</span><span class="p">,</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="s2">"-o", "UserKnownHostsFile=/dev/null"</span><span class="p">,</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="s2">"-o", "IdentitiesOnly=yes"</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>STEP 3: <code>terraform init</code>: NO PROVIDER NAMED <code>registry.terraform.io/hashicorp/docker</code></summary>
+<p><strong>Cause</strong>: A child module uses <code>docker_*</code> resources without declaring <code>kreuzwerker/docker</code> in its own <code>required_providers</code>. Terraform falls back to the implicit <code>hashicorp/docker</code>, which does not exist.</p>
+<p><strong>Fix</strong>: Add a <code>versions.tf</code> to <strong>every</strong> module under <code>modules/</code>, with the same <code>required_providers</code> block as the root:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nb">docker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"kreuzwerker/docker"</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"~&gt; 3.0"</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Then re-run <code>terraform init</code>.</p>
+</details>
+<details class="warning">
+<summary>STEP 5: TUNNELS OPEN BUT EVERY REQUEST FAILS WITH <code>administratively prohibited</code></summary>
+<p><strong>Cause</strong>: TCP port forwarding is disabled in the host's sshd. Some TechZone images ship hardened with <code>DisableForwarding yes</code> or <code>AllowTcpForwarding no</code>. SSH login works fine, but every <code>-L</code> forward is rejected: <code>curl http://localhost:8080</code> gets nothing and the ssh process prints <code>channel N: open failed: administratively prohibited</code>.</p>
+<p><strong>Fix</strong>: Enable forwarding on the host. Run this in a <strong>separate terminal</strong> on your laptop (not the one running Bob Shell), with the lab environment variables set:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s1">'printf "DisableForwarding no\nAllowTcpForwarding yes\n" | sudo tee /etc/ssh/sshd_config.d/0-lab-forwarding.conf &gt;/dev/null &amp;&amp; sudo sshd -t &amp;&amp; sudo systemctl reload sshd &amp;&amp; echo FORWARDING_ENABLED'</span>
+</code></pre></div>
+<p>What it does, piece by piece:</p>
+<ul>
+<li>Writes a drop-in file <code>/etc/ssh/sshd_config.d/0-lab-forwarding.conf</code> containing <code>DisableForwarding no</code> and <code>AllowTcpForwarding yes</code>. The <code>0-</code> prefix makes it sort first among the drop-ins, so it overrides any hardened setting that comes later.</li>
+<li><code>sudo sshd -t</code> test-parses the sshd configuration before anything is applied. If the config were broken it fails here, instead of reloading a bad config and locking you out of the server.</li>
+<li><code>sudo systemctl reload sshd</code> applies the change with a reload rather than a restart, so existing SSH sessions (including any open tunnel attempt) are not dropped.</li>
+<li><code>echo FORWARDING_ENABLED</code> only prints if every previous step succeeded. Seeing that word confirms the change.</li>
+</ul>
+<p>Forwarding is checked when a tunnel channel opens rather than when you log in, so after this, re-run the tunnel command (or tell Bob Shell to retry step 5).</p>
+</details>
+<details class="warning">
+<summary>STEP 5: <code>bind: Address already in use</code> WHEN OPENING SSH TUNNELS</summary>
+<p><strong>Cause</strong>: One of the local ports (8080, 8081, 3000, 9090) is already taken on the laptop.</p>
+<p><strong>Fix</strong>: Find the listener and kill it, or remap the <em>local</em> side of the forward:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>lsof<span class="w"> </span>-i<span class="w"> </span>:3000
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># Option A: kill the existing listener, then reopen the tunnel</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c1"># Option B: remap the local port</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span>-fN<span class="w"> </span>-L<span class="w"> </span><span class="m">13000</span>:127.0.0.1:3000<span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># and open http://localhost:13000 instead</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>STEP 6: TRAEFIK LOGS SPAM <code>client version 1.24 is too old. Minimum supported API version is 1.40</code></summary>
+<p><strong>Cause</strong>: Traefik's docker-provider client library starts at API 1.24, and modern Rancher Desktop refuses that handshake. Setting a <code>DOCKER_API_VERSION</code> environment variable on the container does <strong>not</strong> fix it; the library does not honour it.</p>
+<p><strong>Fix</strong>: Do not use Traefik's docker auto-discovery on this host. Switch to the file provider, with the routing rules rendered by Ansible into <code>/opt/lab/traefik/dynamic/routes.yml</code> and mounted read-only:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Traefik static configuration</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nt">providers</span><span class="p">:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">file</span><span class="p">:</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/traefik/dynamic</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">watch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>As a further benefit, this removes the need to mount the Rancher Desktop socket into Traefik at all, which is better for the security review from Module 1.</p>
+</details>
+<details class="warning">
+<summary>STEP 6: EVERY CONTAINER IS <code>healthy</code>, BUT APACHE SERVES \"It works!\", TRAEFIK 404s AND GRAFANA HAS NO DASHBOARDS</summary>
+<p><strong>Cause</strong>: <code>/opt/lab</code> is not mounted into the Rancher Desktop VM. Rancher Desktop runs Docker inside a Linux VM, so the daemon resolves every bind-mount source against the <strong>VM's</strong> filesystem, not the Ubuntu host's. Ansible rendered the configs on the host; the daemon looked in the VM, found nothing, and created empty directories in their place. Traefik starts with no routes, Apache falls back to its stock landing page so the <code>grep "Welcome"</code> check fails, Prometheus finds no scrape config, and Grafana provisions zero dashboards — while <code>docker ps</code> reports every container healthy. This is the most misleading failure in the lab: it looks like success.</p>
+<p><strong>Fix</strong>: confirm the mount from inside Rancher Desktop rather than from the host.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># On the host: the file Ansible rendered</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"cat /opt/lab/web/index.html | head -3"</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Inside Rancher Desktop: the same path, as the daemon sees it. If this is empty,</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1"># /opt/lab is not in the VM's mount list and no bind mount in this lab works.</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="s2">"docker run --rm -v /opt/lab:/check alpine ls -la /check/web"</span>
+</code></pre></div>
+<p>Add <code>/opt/lab</code> to Rancher Desktop's VM mount list as a writable mount, restart Rancher Desktop, then re-run <code>terraform apply</code> and <code>site.yml --tags content</code>. Re-check with the second command before moving on.</p>
+</details>
+<details class="warning">
+<summary>STEP 7: SELF-HEAL DEMO DOES NOT FIRE, CONTAINER STAYS <code>Exited (137)</code></summary>
+<p><strong>Cause</strong>: Two separate traps:</p>
+<ol>
+<li><code>docker stop</code> / <code>docker kill</code> are treated as <strong>deliberate user stops</strong> by the daemon. <code>restart: always</code> only fires on <em>unexpected</em> exits.</li>
+<li>Even <code>docker exec apache_web kill -9 1</code> from inside is a no-op: Linux protects PID 1 of a PID namespace from SIGKILL. Without <code>tini</code>, httpd-as-PID-1 is immune.</li>
+</ol>
+<p><strong>Fix</strong>: The container must have <code>init = true</code> (set in <a href="../1-1/" target="_blank">Module 1, Step B</a>) so Rancher injects <code>tini</code> as PID 1 and httpd runs as PID 2+. Then crash the app from <em>inside</em>, so the exit looks unexpected to the daemon. The full walkthrough is in <a href="../3-2/" target="_blank">Self-Healing &amp; Recovery</a>.</p>
+</details>
+<hr>
+<h2 id="vii-key-takeaways"><strong>vii. KEY TAKEAWAYS</strong></h2>
+<ul>
+<li>Pre-flight is terminal work: confirm the five environment variables, the project layout, the tool versions, and passwordless sudo before Bob Shell ever starts.</li>
+<li>Clear the <code>shim-signed</code> package state on a fresh TechZone host first; the alternative is debugging two failures that look like one.</li>
+<li><code>terraform.tfvars</code> must exist with an absolute key path and <code>domain = "localhost"</code>, and the Grafana password never lands in it.</li>
+<li>Bob Shell must be launched from the session that exported the variables, since pasting never expands <code>${...}</code> placeholders.</li>
+<li>The prompt's constraints forbid editing the repository and require Bob to stop and report on failure; the run either proves each deliverable or fails.</li>
+<li>Every known failure of the run has a troubleshooting entry matched to the step that produces it.</li>
+</ul>
+<p>
+The tunnels Bob opened are still up. Continue to <a href="../2-2/" target="_blank">Testing and Troubleshooting</a>, where you open the services in your own browser, re-prove idempotency by hand, and verify the no-public-ports security posture with <code>ss -tlnp</code>.</p>
+<hr></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../1-2/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Validation and Enhancement">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Validation and Enhancement
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2-2/" class="md-footer__link md-footer__link--next" aria-label="Next: Testing and Troubleshooting">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Testing and Troubleshooting
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2026 IBM
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.annotate", "content.code.copy", "content.code.select", "navigation.footer"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+        <script src="../_static/hide-toc-nav.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

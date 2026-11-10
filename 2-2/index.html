@@ -1,0 +1,1204 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="DevOps Infrastructure as Code with IBM Bob">
+      
+      
+        <meta name="author" content="Christopher Bienko (cdbienko@us.ibm.com)">
+      
+      
+      
+        <link rel="prev" href="../2-1/">
+      
+      
+        <link rel="next" href="../3-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Testing and Troubleshooting - DevOps Infrastructure as Code with IBM Bob</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../styles/override-print.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#testing-and-troubleshooting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-header__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Infrastructure as Code with IBM Bob
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testing and Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-nav__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    DevOps Infrastructure as Code with IBM Bob
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../toc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table of Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration and Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture and Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Enhancement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Deploy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Deploy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automated Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL VERIFY
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-what-bob-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. WHAT BOB VALIDATED
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-validating-the-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. VALIDATING THE PLATFORM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iii. VALIDATING THE PLATFORM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-the-services-in-a-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the services in a browser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-have-bob-re-prove-the-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional: have Bob re-prove the claims
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-tearing-down-the-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. TEARING DOWN THE TUNNEL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. KEY TAKEAWAYS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Operate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Operate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring and Observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Healing and Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL VERIFY
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-what-bob-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. WHAT BOB VALIDATED
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-validating-the-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. VALIDATING THE PLATFORM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iii. VALIDATING THE PLATFORM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-the-services-in-a-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the services in a browser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-have-bob-re-prove-the-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional: have Bob re-prove the claims
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-tearing-down-the-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. TEARING DOWN THE TUNNEL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. KEY TAKEAWAYS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><p><strong>MODULE 2 | DEPLOY</strong></p>
+<h1 id="testing-and-troubleshooting"><strong>TESTING AND TROUBLESHOOTING</strong></h1>
+<hr>
+<h2 id="i-what-you-will-verify"><strong>i. WHAT YOU WILL VERIFY</strong></h2>
+<p></p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls="" alt="type:video"><source src="../_videos/Deploy%20-%20Testing%20and%20Troubleshooting%20%5BBob%20DevOps%20L3%5D.mp4" type="video/mp4"></video></div><p></p>
+<div class="admonition quote">
+<p>Christopher Bienko <em>(AI Enablement GTM Product Manager)</em> provides an overview of the <em>Deploy - Testing and Troubleshooting</em> module for the hands-on enablement. <strong><a href="https://ibm.seismic.com/Link/Content/DCTMbTWHG47HG8qMQ9jDTcXbXP7V" target="_blank">[2 min]</a></strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">AI MATURITY CURVE</p>
+<p>Take note of the division of labor in this chapter. Bob ran the validation once during deployment. Now you run it again yourself. The previous course called this the control beat: delegate the work, then verify the result before trusting it.</p>
+</div>
+<p>The single prompt from <a href="../2-1/" target="_blank">Automated Deployment</a> continued well past <code>apply</code>: its step 6 validated the whole platform through the tunnels before reporting success. This page covers the part you perform yourself. You open the services in your browser, then hand Bob one follow-up prompt to re-prove the two claims that matter most: <strong>the stack is idempotent</strong>, and <strong>the host has zero public web ports</strong>.</p>
+<p>Everything here runs against <code>localhost</code> on your laptop, which is precisely the design intent: the only path to the platform is the SSH tunnel Bob Shell opened in Step 5.</p>
+<hr>
+<h2 id="ii-what-bob-validated"><strong>ii. WHAT BOB VALIDATED</strong></h2>
+<p>There is nothing to run in this section. Step 6 of the deployment prompt validated the platform. It ran four HTTP checks through the tunnels — the app, the Traefik API, Grafana, and Prometheus. It also produced a remote <code>docker ps</code> listing and a port audit confirming that nothing binds to <code>0.0.0.0</code>. If a service misbehaves once you start browsing, the two dropdowns below cover the usual causes.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>channel ... open failed: connect failed</code> when curling localhost</summary>
+<p><strong>Cause</strong>: The tunnel is up, but the remote container is not yet listening on <code>127.0.0.1</code>. Either it is still starting, or its <code>ports</code> block does not bind to loopback.</p>
+<p><strong>Fix</strong>: Re-check what's running and listening on the host, and confirm <code>ip = "127.0.0.1"</code> in the Terraform <code>ports</code> block:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"docker ps"</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"ss -tlnp | grep -E ':(80|3000|8080|9090)'"</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>localhost:8080</code> works but <code>localhost:3000</code> does not</summary>
+<p><strong>Cause</strong>: Grafana has not finished its first-boot database migration; the other services come up faster.</p>
+<p><strong>Fix</strong>: Wait 15–20 seconds and re-curl <code>http://localhost:3000/api/health</code>. If it persists:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"docker logs grafana --tail 50"</span>
+</code></pre></div>
+</details>
+<hr>
+<h2 id="iii-validating-the-platform"><strong>iii. VALIDATING THE PLATFORM</strong></h2>
+<p>After Bob Shell finishes, the tunnels are already up. Inspect the platform directly first, then hand the remaining proofs back to Bob.</p>
+<hr>
+<h3 id="open-the-services-in-a-browser"><strong>Open the services in a browser</strong></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>open<span class="w"> </span>http://localhost:8080<span class="w">      </span><span class="c1"># the app</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>open<span class="w"> </span>http://localhost:3000<span class="w">      </span><span class="c1"># Grafana (labadmin / $TF_VAR_grafana_admin_password)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>open<span class="w"> </span>http://localhost:8081<span class="w">      </span><span class="c1"># Traefik dashboard</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>open<span class="w"> </span>http://localhost:9090<span class="w">      </span><span class="c1"># Prometheus</span>
+</code></pre></div>
+<div class="admonition warning">
+<p>The <code>open</code> command is specific for <em>macOS</em>. Use <code>xdg-open</code> on <em>Linux</em>.</p>
+</div>
+<p>The app's landing page, served by Apache behind Traefik. The card itself confirms the design: <code>lab_net</code> network, <code>127.0.0.1</code> bindings only, provisioned by Ansible + Terraform:</p>
+<p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/d840914c-579e-49f3-9535-c80b5a050565/sps-redacted-e326392ef73d4cb6ab069c0254f5d291_3903748e0c324a498d0272d60d9256da_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/d840914c-579e-49f3-9535-c80b5a050565/sps-redacted-e326392ef73d4cb6ab069c0254f5d291_3903748e0c324a498d0272d60d9256da_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>Grafana's login screen. Sign in with <code>labadmin</code> and your <code>TF_VAR_grafana_admin_password</code>:</p>
+<p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/87dcc1de-93af-48cb-abe1-9f65d0db26fd/sps-redacted-82c507739ac249bdbcd6be52d667ea26_89e86b7335de404e9b4ddfc26d545f55_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/87dcc1de-93af-48cb-abe1-9f65d0db26fd/sps-redacted-82c507739ac249bdbcd6be52d667ea26_89e86b7335de404e9b4ddfc26d545f55_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>The Traefik dashboard opens straight to its router and service view, with no login required. Module 1 recorded that as an accepted risk rather than a finding: the dashboard is only reachable through your tunnel, so a password on it would protect nothing while hiding the credentials from you.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: the Traefik dashboard asks you to sign in</summary>
+<p><strong>Cause</strong>: The Step D audit ignored the accepted-risks block and put a BasicAuth middleware in front of the dashboard. It generated the password hash itself, so there is no credential to type. This is the most common way the lab goes wrong.</p>
+<p><strong>Fix</strong>: Find the middleware and take it out, then re-apply:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>grep<span class="w"> </span>-rn<span class="w"> </span><span class="s1">'basicauth\|users *='</span><span class="w"> </span>infra/terraform<span class="w"> </span>infra/ansible
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>infra/terraform<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>terraform<span class="w"> </span>apply
+</code></pre></div>
+<p>Then re-run the <a href="../1-1/#v-step-d-security-secrets-review" target="_blank">Step D audit</a> with its accepted-risks block intact, so the middleware does not come back on the next pass.</p>
+</details>
+<p>Prometheus opens straight to its query page with no login required. Reachability is its protection, since the only path to it is your tunnel:</p>
+<p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/88231e7c-f13e-4cb9-a04c-0c25122fa96b/sps-redacted-6ce3716549f44158bb6dbc787e1dcc79_cb56afcec11d4b1d95db0bc1a757a93a_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-03/88231e7c-f13e-4cb9-a04c-0c25122fa96b/sps-redacted-6ce3716549f44158bb6dbc787e1dcc79_cb56afcec11d4b1d95db0bc1a757a93a_text_export.jpeg" alt="" width="600"></a>
+</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: Grafana says <code>invalid username or password</code></summary>
+<p><strong>Cause</strong>: <code>TF_VAR_grafana_admin_password</code> was not exported in the <strong>same shell</strong> that ran <code>terraform apply</code>, so Grafana was provisioned with a different password than the one you are typing. (Remember also that the username is <code>labadmin</code> rather than <code>admin</code>.)</p>
+<p><strong>Fix</strong>: <code>GF_SECURITY_ADMIN_PASSWORD</code> only takes effect the first time Grafana initialises its database, and that database lives on a named volume that survives container replacement. So re-running <code>terraform apply</code> on its own will not change the password. Reset it in place instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">"docker exec grafana grafana-cli admin reset-admin-password '&lt;your-password&gt;'"</span>
+</code></pre></div>
+<p>Then export the same value so future applies agree with it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_VAR_grafana_admin_password</span><span class="o">=</span><span class="s1">'&lt;your-password&gt;'</span>
+</code></pre></div>
+<p>Log in as <code>labadmin</code> with that value. To start completely clean instead, remove the <code>grafana_data</code> volume and re-apply, which loses saved dashboards.</p>
+</details>
+<hr>
+<h3 id="optional-have-bob-re-prove-the-claims"><strong>Optional: have Bob re-prove the claims</strong></h3>
+<p>Give Bob Shell one follow-up prompt:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Re-run terraform plan and ansible-playbook in --check mode and confirm 0 changes. Then show me that no port is bound to 0.0.0.0 on the host.
+</code></pre></div>
+<p>Bob runs the same commands an operator would and reports back. Read its output against what must hold:</p>
+<ul>
+<li><code>terraform plan</code> reports <strong>No changes</strong>, meaning the real infrastructure matches the code.</li>
+<li>The Ansible check run finishes with <strong><code>changed=0</code></strong> in the PLAY RECAP.</li>
+<li>The port listing on the host (<code>ss -tlnp</code>) shows every published port on <strong><code>127.0.0.1</code></strong>, never <code>0.0.0.0</code>. The cloud security group never changed: only SSH is exposed, and the internet cannot see this platform at all.</li>
+</ul>
+<p>This is what distinguishes infrastructure from a script — running it a second time does nothing, because nothing remains to converge. If Bob reports changes instead, that is drift, and the two most common causes are covered below.</p>
+<p>Killing a container to prove self-healing belongs to <a href="../3-2/" target="_blank">Self-Healing &amp; Recovery</a>. This page validates; Module 3 breaks things deliberately.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>terraform plan</code> keeps showing N to add / N to destroy on a re-run</summary>
+<p><strong>Cause</strong>: The kreuzwerker/docker provider sees the daemon-injected <code>log_opts</code> (from <code>daemon.json</code>) and the image's <code>USER</code> / <code>WORKDIR</code> defaults as drift, and they <code>forces replacement</code>.</p>
+<p><strong>Fix</strong>: Every <code>docker_container</code> resource needs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">lifecycle</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="na">ignore_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nb">log_opts, user, working_dir, command</span><span class="p">]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Re-apply once; after that, <code>plan</code> is a clean no-op.</p>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: Ansible <code>--check</code> reports unexpected <code>changed</code></summary>
+<p><strong>Cause</strong>: A Jinja template uses non-deterministic data (timestamps, random ids), so the rendered file differs on every run.</p>
+<p><strong>Fix</strong>: Pin such values to variables so the rendered output is stable, then prove it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>infra/ansible
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory.ini<span class="w"> </span>site.yml<span class="w"> </span>--check<span class="w"> </span>--diff<span class="w"> </span>--private-key<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span>
+</code></pre></div>
+<p><code>--diff</code> shows exactly which lines churn; that is the template to fix.</p>
+</details>
+<hr>
+<h2 id="iv-tearing-down-the-tunnel"><strong>iv. TEARING DOWN THE TUNNEL</strong></h2>
+<p>When you have finished demonstrating, terminate the multiplexed SSH session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pkill<span class="w"> </span>-f<span class="w"> </span><span class="s2">"ssh.*-L 8080:127.0.0.1:80.*</span><span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="s2">"</span>
+</code></pre></div>
+<p>Matching on the forward and the host, rather than on <code>ssh.*${TARGET_HOST}</code> alone, means an interactive SSH session you have open to the same server survives.</p>
+<p>If a check fails instead, there is no need to debug from scratch. It might be <code>channel open failed</code> on a curl, Grafana rejecting the admin password, or <code>bind: Address already in use</code> when the tunnel starts. Each of those has a <strong>Troubleshooting</strong> dropdown next to the step that produces it — on this page and in <a href="../2-1/#vi-if-the-run-fails" target="_blank">Automated Deployment</a>.</p>
+<hr>
+<h2 id="v-key-takeaways"><strong>v. KEY TAKEAWAYS</strong></h2>
+<ul>
+<li>Bob's deployment prompt validated the platform once; the operator verifies it a second time, in person.</li>
+<li>A clean <code>terraform plan</code> (<strong>No changes</strong>) and an Ansible check run with <code>changed=0</code> are the proof of idempotency.</li>
+<li>Every published port sits on <code>127.0.0.1</code>, never on <code>0.0.0.0</code>, and the security group exposes SSH alone.</li>
+<li>The Traefik dashboard and Prometheus carry no login by design; reachability through the tunnel is their protection.</li>
+<li>Grafana's admin password takes effect only at first initialization, so a mismatch is reset in place rather than re-applied.</li>
+<li>Recurring plan churn and Ansible <code>changed</code> reports are drift, and each has a known cause documented beside the step that reveals it.</li>
+</ul>
+<p>
+The platform is deployed and validated. Continue to <a href="../3-1/" target="_blank">Monitoring &amp; Observability</a> to work with the Grafana and Prometheus stack, then to <a href="../3-2/" target="_blank">Self-Healing &amp; Recovery</a> to crash a container and watch Rancher's restart policy bring it back.</p>
+<hr></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../2-1/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Automated Deployment">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Automated Deployment
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../3-1/" class="md-footer__link md-footer__link--next" aria-label="Next: Monitoring and Observability">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Monitoring and Observability
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2026 IBM
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.annotate", "content.code.copy", "content.code.select", "navigation.footer"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+        <script src="../_static/hide-toc-nav.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

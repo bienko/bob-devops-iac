@@ -1,0 +1,2443 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="DevOps Infrastructure as Code with IBM Bob">
+      
+      
+        <meta name="author" content="Christopher Bienko (cdbienko@us.ibm.com)">
+      
+      
+      
+        <link rel="prev" href="../setup/">
+      
+      
+        <link rel="next" href="../1-2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Architecture and Planning - DevOps Infrastructure as Code with IBM Bob</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../styles/override-print.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture-and-planning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-header__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Infrastructure as Code with IBM Bob
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture and Planning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-nav__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    DevOps Infrastructure as Code with IBM Bob
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../toc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table of Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration and Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture and Planning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture and Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL DESIGN
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="i. WHAT YOU WILL DESIGN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The requirement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-step-a-understand-the-goal-and-sketch-the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. STEP A: UNDERSTAND THE GOAL AND SKETCH THE ARCHITECTURE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ii. STEP A: UNDERSTAND THE GOAL AND SKETCH THE ARCHITECTURE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhancing-the-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enhancing the prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-the-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sending the prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bobs-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bob's response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-step-b-generate-the-terraform-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. STEP B: GENERATE THE TERRAFORM LAYER
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iii. STEP B: GENERATE THE TERRAFORM LAYER">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-generated-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the generated files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        README.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-step-c-generate-the-ansible-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. STEP C: GENERATE THE ANSIBLE LAYER
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iv. STEP C: GENERATE THE ANSIBLE LAYER">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bobs-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bob's plan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-and-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation and fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-generated-files_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the generated files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-step-d-security-secrets-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. STEP D: SECURITY &amp; SECRETS REVIEW
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="v. STEP D: SECURITY &amp; SECRETS REVIEW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-review-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vi. REVIEW &amp; APPROVAL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vii. KEY TAKEAWAYS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Enhancement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Deploy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Deploy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automated Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Operate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Operate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring and Observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Healing and Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL DESIGN
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="i. WHAT YOU WILL DESIGN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The requirement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-step-a-understand-the-goal-and-sketch-the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. STEP A: UNDERSTAND THE GOAL AND SKETCH THE ARCHITECTURE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ii. STEP A: UNDERSTAND THE GOAL AND SKETCH THE ARCHITECTURE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhancing-the-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enhancing the prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-the-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sending the prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bobs-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bob's response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-step-b-generate-the-terraform-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. STEP B: GENERATE THE TERRAFORM LAYER
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iii. STEP B: GENERATE THE TERRAFORM LAYER">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-generated-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the generated files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        README.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-step-c-generate-the-ansible-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. STEP C: GENERATE THE ANSIBLE LAYER
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iv. STEP C: GENERATE THE ANSIBLE LAYER">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bobs-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bob's plan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-and-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation and fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-generated-files_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the generated files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-step-d-security-secrets-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. STEP D: SECURITY &amp; SECRETS REVIEW
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="v. STEP D: SECURITY &amp; SECRETS REVIEW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-check-before-moving-on_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to check before moving on
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-review-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vi. REVIEW &amp; APPROVAL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vii. KEY TAKEAWAYS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><p><strong>MODULE 1 | DESIGN</strong></p>
+<h1 id="architecture-and-planning"><strong>ARCHITECTURE AND PLANNING</strong></h1>
+<hr>
+<h2 id="i-what-you-will-design"><strong>i. WHAT YOU WILL DESIGN</strong></h2>
+<p></p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls="" alt="type:video"><source src="../_videos/Design%20-%20Architecture%20and%20Planning%20%5BBob%20DevOps%20L3%5D.mp4" type="video/mp4"></video></div><p></p>
+<div class="admonition quote">
+<p>Christopher Bienko <em>(AI Enablement GTM Product Manager)</em> provides an overview of the <em>Design - Architecture and Planning</em> module for the hands-on enablement. <strong><a href="https://ibm.seismic.com/Link/Content/DCpBCP49fHbTMGqW38cGDfhcfFbd" target="_blank">[2 min]</a></strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">AI MATURITY CURVE</p>
+<p>This module is the plan-first delegation discipline of <strong>Module 2 | Delegate</strong>, applied to infrastructure. Bob proposes in Plan mode, you review, and only then does Agent mode write files. Every sub-task carries its own approval gate, and every check Bob runs on its own work needs your consent before it executes. The scope is larger than anything in the previous course; the rhythm is the same one you practiced there.</p>
+</div>
+<p>In this module you hand Bob IDE a one-paragraph requirement and guide it through four steps:</p>
+<ul>
+<li><strong>Step A</strong>: turn the requirement into an explicit architecture</li>
+<li><strong>Step B</strong>: generate the Terraform layer (network, containers, volumes)</li>
+<li><strong>Step C</strong>: generate the Ansible layer (host bootstrap + content)</li>
+<li><strong>Step D</strong>: audit the result for security and secrets issues</li>
+</ul>
+<p>Everything happens in Bob IDE on your laptop; nothing touches the server yet. Deployment is Module 2. Your job at every step is the same: paste the prompt, read what Bob produces, and approve it only when you are satisfied it matches the requirement.</p>
+<hr>
+<h3 id="the-requirement"><strong>The requirement</strong></h3>
+<p>This single paragraph is the entire specification the platform gets built from:</p>
+<div class="admonition warning">
+<p>We have a fresh Ubuntu 22.04 server reachable <strong>only via SSH</strong>. No other inbound ports are open and the cloud security group cannot be changed. We need a production-grade containerized web platform: Traefik as reverse proxy, Apache serving a custom landing page, Prometheus for metrics, and Grafana for dashboards. Every container must bind to 127.0.0.1 (never 0.0.0.0) so access is exclusively through SSH tunnels from the operator's laptop.</p>
+</div>
+<hr>
+<h2 id="ii-step-a-understand-the-goal-and-sketch-the-architecture"><strong>ii. STEP A: UNDERSTAND THE GOAL AND SKETCH THE ARCHITECTURE</strong></h2>
+<p>Before writing a single line of code, you need an overarching picture of <strong>what</strong> you are building. That is what this step produces: a component diagram, the request and metrics flows, and the list of variables and secrets.</p>
+<hr>
+<ol>
+<li><strong><a href="https://pages.github.ibm.com/cdbienko/bob-devops-iac/setup/#open-the-lab-folder" target="_blank">Open the lab assets folder</a></strong> within the Bob IDE.</li>
+</ol>
+<hr>
+<ol start="2">
+<li>
+<p>Copy and paste the following prompt below into Bob's <strong>Agentic Sidebar</strong> chat, then hit <span class="keys"><kbd class="key-enter">Enter</kbd></span> to execute:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>We have a fresh Ubuntu 22.04 server reachable only via SSH at $TARGET_HOST:$SSH_PORT. No other inbound ports are open and the cloud security group cannot be changed. I want a production-grade containerized web platform deployed by code: Traefik 2 as the reverse proxy with access logs, an Apache 2.4 container serving a custom landing page, Prometheus for metrics, Grafana for dashboards (admin password from a variable). Every container must bind to 127.0.0.1 on the host (never 0.0.0.0) so the only way to reach them is through ssh -L tunnels from the operator's laptop. Everything runs on a private Docker network with named volumes and a healthcheck on every container. Describe the target architecture, the request flow from the operator browser through the SSH tunnel into the host loopback into Traefik into Apache, the data flow for metrics, and produce a Mermaid component diagram that explicitly shows the SSH tunnel boundary. Then list the variables, secrets and outputs we will need.
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>These decisions are already made. Implement them and do not ask me about them:
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- Host bindings, all on 127.0.0.1: Traefik web entrypoint 80, Traefik dashboard 8080, Grafana 3000, Prometheus 9090. The operator forwards high local ports (8080 to 80, 8081 to 8080); never a local port below 1024, which needs root on the laptop.
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>- Traefik routing: one router with rule PathPrefix(`/`) on the web entrypoint, service http://apache_web:80. No Host() rule — the operator arrives through the tunnel as localhost, which no Host rule matches.
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>- Images, pinned explicitly, never :latest: traefik:v2.11 (stay on 2.x for the file provider, not Traefik 3), httpd:2.4-alpine (Alpine is required — the self-healing demo needs busybox pidof), prom/prometheus:v2.53.0, grafana/grafana:11.1.0.
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>- Prometheus is reachable on 127.0.0.1:9090 for direct PromQL, not internal-only.
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>- No Apache metrics. Do not add apache_exporter or Blackbox Exporter. Traefik and Prometheus are the only scrape targets; Apache is measured by Traefik's per-service counters.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>- The Grafana dashboard is a minimal custom JSON written for this stack, never a community dashboard ID.
+</code></pre></div>
+</li>
+</ol>
+<hr>
+<h3 id="enhancing-the-prompt"><strong>Enhancing the prompt</strong></h3>
+<ol start="3">
+<li>
+<p>Click the sparkle icon to enhance the prompt.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/bea3660a-c51f-4ace-9da4-d4af8487a21d/user_cropped_screenshot_bcb40d97780a40e58def9d4e49cd84da_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/bea3660a-c51f-4ace-9da4-d4af8487a21d/user_cropped_screenshot_bcb40d97780a40e58def9d4e49cd84da_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li>
+<p>Bob breaks the one-paragraph prompt into a structured spec. The critical constraint is called out on its own, followed by a numbered list of deliverables: the diagram, the request path, the metrics topology, the variables and secrets, the SSH posture, and the limitations.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/76fd6726-a5b1-4678-aa26-049f44480a44/user_cropped_screenshot_ca4ebb050ae54a3ea4a3e413a409b46d_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/76fd6726-a5b1-4678-aa26-049f44480a44/user_cropped_screenshot_ca4ebb050ae54a3ea4a3e413a409b46d_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>Your enhanced prompt should look something like:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Analyze the requirement above and produce a complete platform design for a single-host, multi-container web stack on Ubuntu 22.04 that includes Traefik 2 as an L7 reverse proxy with structured access logs, restart-on-failure policy and file provider configuration, an Apache 2.4 backend serving a Jinja-templated landing page, a Prometheus instance scraping Traefik metrics, a Grafana instance with a pre-provisioned datasource and starter dashboard whose admin password is sourced from a Terraform variable, and a Docker user-defined bridge network isolating all containers with named volumes for Grafana, Prometheus and Traefik certs.
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Critical constraint: every published port MUST bind to the host loopback (ip = "127.0.0.1" in the Docker provider ports block) — nothing on 0.0.0.0. Operator access is exclusively via ssh -L localPort:127.0.0.1:remotePort tunnels from the laptop.
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Produce:
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>(1) a Mermaid C4-style component diagram with a clearly labelled SSH-tunnel trust boundary between laptop and host
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>(2) the end-to-end request path browser -&gt; ssh tunnel -&gt; host loopback -&gt; Traefik -&gt; Apache
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>(3) the metrics scrape topology (all in-host loopback or container-network, never internet)
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>(4) a complete table of Terraform variables (target_host, ssh_user, ssh_port, ssh_private_key_path, grafana_admin_password, traefik_local_port, grafana_local_port, prometheus_local_port, traefik_dashboard_local_port)
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>(5) Ansible group_vars and required secrets with owner and rotation policy
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>(6) the minimum SSH posture on the host (key-only, no password auth)
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>(7) the explicit non-goals and known limitations of a single-host, tunnel-only design (no public TLS, single SPOF, operator must be online to demo)
+</code></pre></div>
+</li>
+</ol>
+<hr>
+<h3 id="sending-the-prompt"><strong>Sending the prompt</strong></h3>
+<ol start="5">
+<li>
+<p>Switch Bob's mode to <strong>Plan</strong>.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/241dee23-941b-4e30-a5ec-beea40d60aa6/user_cropped_screenshot_2ead27c843394e39b1e6ffda4e25d422_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/241dee23-941b-4e30-a5ec-beea40d60aa6/user_cropped_screenshot_2ead27c843394e39b1e6ffda4e25d422_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="6">
+<li>Hit <span class="keys"><kbd class="key-enter">Enter</kbd></span> to instruct Bob to execute the prompt.</li>
+</ol>
+<hr>
+<h3 id="bobs-response"><strong>Bob's response</strong></h3>
+<ol start="7">
+<li>
+<p>Approve the <strong>create-plan</strong> skill once. This is Bob asking permission to run its planning skill, which writes the design as a plan document you can review, instead of a plain chat reply. Approving it builds nothing yet.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/117cc604-0e6b-4ad6-99b7-c11d4fc7842e/user_cropped_screenshot_dc4401fdf74b46369ffc81ff43ef0d53_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/117cc604-0e6b-4ad6-99b7-c11d4fc7842e/user_cropped_screenshot_dc4401fdf74b46369ffc81ff43ef0d53_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="8">
+<li>
+<p>Bob scans the lab folder, finds only the three workshop files (a clean slate), works out that the entire platform must be designed from scratch, and starts writing the plan.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/2adf557c-bacd-46ff-9283-19eb80188cb4/user_cropped_screenshot_6b083e8c813c4beaa75d820d6fd0a876_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/2adf557c-bacd-46ff-9283-19eb80188cb4/user_cropped_screenshot_6b083e8c813c4beaa75d820d6fd0a876_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="9">
+<li>
+<p>Bob writes the platform design document, recording each key design decision with the reason behind it.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/f4f0a146-9abe-40f0-bf60-12be22c71eb0/sps-redacted-6887614b82d448eda4b67f3a19d62404_8fd1454e80d0457fafe5a27302734136_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/f4f0a146-9abe-40f0-bf60-12be22c71eb0/sps-redacted-6887614b82d448eda4b67f3a19d62404_8fd1454e80d0457fafe5a27302734136_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="10">
+<li>
+<p>The plan markdown file is now visible in the lab directory.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/04878a86-ebdf-4fb8-a8c7-699d3e538004/user_cropped_screenshot_bb1e7116c54049aa8744eb2cddcfcb98_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/04878a86-ebdf-4fb8-a8c7-699d3e538004/user_cropped_screenshot_bb1e7116c54049aa8744eb2cddcfcb98_text_export.jpeg" alt="" width="600"></a>
+</p>
+<div class="admonition warning">
+<p class="admonition-title">YOUR RUN MIGHT NOT MATCH THE SCREENSHOTS WORD-FOR-WORD</p>
+<p>Bob phrases things differently on each run; what matters is that every item in the checklist below is present.</p>
+</div>
+<details class="info">
+<summary>IF BOB OFFERS TO IMPLEMENT THE WHOLE PLAN</summary>
+<p>After writing the plan, Bob may ask you to pick an option to start implementing everything in one shot. Once the plan is done, click the <strong>stop</strong> button to end the prompt's execution. Implementation starts in Step B.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="_attachments/step-a-confirm-decisions.png" data-desc-position="bottom"><img src="_attachments/step-a-confirm-decisions.png" alt="" width="600"></a>
+</p>
+</details>
+<details class="info">
+<summary>IF BOB STILL STOPS TO ASK A DESIGN QUESTION</summary>
+<p>The prompt above pins every decision Bob normally asks about, so it should go straight to the plan. If a run asks anyway, the answers are in that list — and the general rule behind them is <strong>use the fewest containers, export only what your two scrape targets actually provide, and pull nothing from an external catalog</strong>.</p>
+<p>Two answers cost the most if given wrong. Never add an Apache exporter: Traefik's per-service counters already measure Apache, and scraping <code>mod_status</code> gives Prometheus HTML it cannot parse. And never accept a community Grafana dashboard: they ship in HTTP-API format wrapped in <code>{"dashboard": {...}}</code>, which file provisioning rejects with <em>"Dashboard title cannot be empty"</em>, leaving you with no dashboards at all.</p>
+</details>
+<p>Because you are in Plan Mode, Bob responds with a <strong>design document rather than code</strong>. It contains a written architecture description and a Mermaid component diagram. It also lays out the request and metrics flows, along with a table of the variables and secrets the build will need.</p>
+</li>
+</ol>
+<hr>
+<h3 id="what-to-check-before-moving-on"><strong>What to check before moving on</strong></h3>
+<p>Bob's design should contain all of the following:</p>
+<ul>
+<li>A Mermaid component diagram with the SSH tunnel drawn as an explicit trust boundary</li>
+<li>The request path: browser → <code>ssh -L</code> tunnel → host loopback → Traefik → Apache</li>
+<li>A metrics topology that never leaves the host: Prometheus scrapes Traefik over the container network, and <strong>Traefik and Prometheus itself are the only two scrape targets</strong> — no Apache exporter</li>
+<li>A table of variables and secrets: host, user, port, key path, Grafana admin password, local tunnel ports</li>
+<li>Honest limitations: no public TLS, a single host is a single point of failure, and the operator must be online to reach the stack</li>
+<li>The container engine is named as Rancher Desktop, not Docker CE, and the design still uses Docker networks, Docker volumes and the <code>kreuzwerker/docker</code> provider</li>
+</ul>
+<hr>
+<h2 id="iii-step-b-generate-the-terraform-layer"><strong>iii. STEP B: GENERATE THE TERRAFORM LAYER</strong></h2>
+<p>This step generates the Terraform half of the platform: <strong>what exists on the server</strong>, the private Rancher network, the four containers, their volumes and port bindings. What runs <em>inside</em> all of that (web pages, dashboards, configs) is Ansible's half, generated in Step C.</p>
+<hr>
+<ol>
+<li>
+<p>Copy and paste the contents of the following code block into the Agentic Sidebar. Since it is long, Bob may show it as a collapsed window — <strong>click</strong> the "copy" icon next to the text block to ensure you've captured the entire statement.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Generate a Terraform layout under infra/terraform/ using the kreuzwerker/docker provider configured against the remote container engine over SSH (ssh://${SSH_USER}@${TARGET_HOST}:${SSH_PORT}, identity file from var.ssh_private_key_path, with ssh_opts -i &lt;key&gt; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o IdentitiesOnly=yes). The engine is headless Rancher Desktop (the rdd daemon), which runs Moby's dockerd underneath and speaks the same Docker API, so this provider needs no Rancher-specific configuration — the Ansible bootstrap role exposes its socket at the standard path for exactly that reason.
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Create modules: network, traefik, web, monitoring. Each module owns its own resources and outputs.
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Critical implementation rules:
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>(a) the root versions.tf AND every modules/*/versions.tf must declare kreuzwerker/docker in required_providers - without this, Terraform silently looks for the non-existent hashicorp/docker and init fails
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>(b) every container ports block MUST set ip = "127.0.0.1" so nothing is exposed to the public interface
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>(c) every container resource must include lifecycle { ignore_changes = [log_opts, user, working_dir, command] } because the Docker daemon's daemon.json log-opts and the image's USER/WORKDIR defaults appear as drift on every plan and trigger needless replacements
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>(d) for Traefik specifically, do NOT use the docker provider auto-discovery - modern Docker Engine (25+) requires API &gt;=1.40 but the Traefik docker client library starts at 1.24 and the daemon refuses the handshake. Instead use the file provider (--providers.file.directory=/etc/traefik-dynamic --providers.file.watch=true) with the routing config rendered by Ansible, mounted read-only. Mount it at /etc/traefik-dynamic, not inside /etc/traefik, because a bind mount nested under another mount in the same directory fails unpredictably. This is also better for the security review (no Docker socket exposure)
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>(e) for the web module's container, set init = true so Docker injects tini as PID 1 - needed so the self-healing demo in Part 2 actually works (Linux protects PID 1 of a PID namespace from SIGKILL, so without init=true httpd-as-PID-1 cannot be crashed from inside the container)
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>(f) every bind-mount source is an absolute path on the remote host, and always a directory, never a single file. The daemon resolves mount sources on the server, so path.module and path.root point at nothing; and Docker creates a missing file source as a directory of that name, which kills the container with "not a directory: Are you trying to mount a directory onto a file"
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>(g) every container sets restart = "always", or the self-healing demo in Part 2 has nothing to demonstrate
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>(g2) every healthcheck must call a binary that exists in that image. httpd:2.4-alpine ships no wget, curl, nc or busybox, so the usual wget-based test fails forever on a container that is serving correctly and Docker marks it unhealthy. Check what the image contains before writing the test; if it has no HTTP client, use a check that depends only on what is there
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>(h) Traefik's entrypoints inside the container are web on :80 and traefik on :8080. Two entrypoints on the same port make Traefik exit at startup with "error opening listener: address already in use". Add --ping=true so its own healthcheck answers
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>(i) Traefik access logs must go to stdout: --accesslog=true with no --accesslog.filepath. Promtail tails container stdout, so a filepath sends the access log to a file inside the container where Loki never sees it. Leave the format at its Common Log Format default
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Ansible renders the host files that Terraform mounts, so both layers must name the same paths. Mount these directories, read-only:
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>/opt/lab/traefik/dynamic       -&gt; /etc/traefik-dynamic
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>/opt/lab/web                   -&gt; /usr/local/apache2/htdocs
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>/opt/lab/prometheus            -&gt; /etc/prometheus
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>/opt/lab/grafana/provisioning  -&gt; /etc/grafana/provisioning
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>/opt/lab/grafana/dashboards    -&gt; /etc/grafana/dashboards
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>Name the containers traefik, apache_web, prometheus and grafana, because Part 2 addresses them by name. Publish on the host loopback at Traefik web 127.0.0.1:80, Traefik dashboard 127.0.0.1:8080, Grafana 127.0.0.1:3000, Prometheus 127.0.0.1:9090; those are the ports Part 2 tunnels to, and they are not the same numbers as the laptop-side ports. apache_web publishes nothing and is reached only through Traefik on the private network. Declare grafana_admin_user defaulting to "labadmin" alongside grafana_admin_password.
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>Use terraform.tfvars.example for inputs (target_host, ssh_user, ssh_port, ssh_private_key_path, grafana_admin_user, grafana_admin_password, domain) and never hardcode secrets. Generate outputs.tf exposing the localhost URLs operators will hit through the SSH tunnel (e.g. http://localhost:8080 for the app, http://localhost:8081 for the Traefik dashboard, http://localhost:3000 for Grafana, http://localhost:9090 for Prometheus) plus a tunnel_command output that prints the exact one-line ssh -fN -L ... command. The code must pass terraform fmt -check and terraform validate. Include a short README with init/plan/apply commands.
+</code></pre></div>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/3b9f3876-a9d5-4bdf-95f9-21b6f8a345c1/user_cropped_screenshot_d667472e957b437e8388c4259a331498_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/3b9f3876-a9d5-4bdf-95f9-21b6f8a345c1/user_cropped_screenshot_d667472e957b437e8388c4259a331498_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>
+<p>Switch Bob's mode to <strong>Agent</strong> so it can write files.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/5e0598d8-54aa-4c18-a780-d2696d01d34c/user_cropped_screenshot_58d0a3e728ab45ac845420af2b9f0afd_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/5e0598d8-54aa-4c18-a780-d2696d01d34c/user_cropped_screenshot_58d0a3e728ab45ac845420af2b9f0afd_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li>
+<p>Hit <span class="keys"><kbd class="key-enter">Enter</kbd></span> to execute the instructions.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/5ec389e5-1059-4082-b8cf-87f4a5f67fc0/user_cropped_screenshot_da6c306b7ad64f60b65cd3c867e37a75_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/5ec389e5-1059-4082-b8cf-87f4a5f67fc0/user_cropped_screenshot_da6c306b7ad64f60b65cd3c867e37a75_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="infrastructure-generation"><strong>Infrastructure generation</strong></h3>
+<ol start="4">
+<li>
+<p>Bob generates a todo list and asks you to approve it. This is Bob's work plan for the whole step, and it is worth reading item by item because it shows how Bob translated the prompt into work:</p>
+<table>
+<thead>
+<tr>
+<th>SUB-TASK</th>
+<th>OBJECTIVES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sub-Task 1</td>
+<td>Generate the Terraform layout under <code>infra/terraform/</code></td>
+</tr>
+<tr>
+<td>Sub-Task 2</td>
+<td>Create the root module: <code>versions.tf</code>, <code>variables.tf</code>, <code>main.tf</code>, <code>outputs.tf</code>, <code>terraform.tfvars.example</code></td>
+</tr>
+<tr>
+<td>Sub-Task 3</td>
+<td>Create the <code>network</code> module: the private bridge network <code>lab_net</code> that every container joins</td>
+</tr>
+<tr>
+<td>Sub-Task 4</td>
+<td>Create the <code>traefik</code> module: the reverse proxy container and its certificate volume</td>
+</tr>
+<tr>
+<td>Sub-Task 5</td>
+<td>Create the <code>web</code> module: the Apache container with <code>init = true</code> from rule e</td>
+</tr>
+<tr>
+<td>Sub-Task 6</td>
+<td>Create the <code>monitoring</code> module: Prometheus and Grafana, each with a data volume</td>
+</tr>
+<tr>
+<td>Sub-Task 7</td>
+<td>Validate that every module declares <code>kreuzwerker/docker</code> in <code>required_providers</code> (rule a)</td>
+</tr>
+<tr>
+<td>Sub-Task 8</td>
+<td>Validate that every ports block has <code>ip = "127.0.0.1"</code> (rule b)</td>
+</tr>
+<tr>
+<td>Sub-Task 9</td>
+<td>Validate that every container has a <code>lifecycle ignore_changes</code> block (rule c)</td>
+</tr>
+<tr>
+<td>Sub-Task 10</td>
+<td>Run <code>terraform fmt</code> and <code>terraform validate</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note the shape: create first, then validate against the prompt's own rules. Approve the list and Bob works through the items in order, ticking each one off.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/ee289b98-7770-4bd8-8d40-e07a9e07a7fe/user_cropped_screenshot_47304a0dd05248b28c5669d33759385d_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/ee289b98-7770-4bd8-8d40-e07a9e07a7fe/user_cropped_screenshot_47304a0dd05248b28c5669d33759385d_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="5">
+<li>
+<p>Bob starts with the root module. It asks to create the <code>infra/terraform/</code> directory and the root files. These are the provider constraint (<code>versions.tf</code>), every input (<code>variables.tf</code>), and the wiring that calls the four modules (<code>main.tf</code>), together with the outputs and <code>terraform.tfvars.example</code>. The approval card shows each file's contents. Skim them, then approve to let Bob write them to the workspace.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/48ab869f-32ec-4990-a55f-fcac77c2adf4/user_cropped_screenshot_12ad3b26bfe14831a3d7622164fd0de4_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/48ab869f-32ec-4990-a55f-fcac77c2adf4/user_cropped_screenshot_12ad3b26bfe14831a3d7622164fd0de4_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="6">
+<li>
+<p>Bob scaffolds the <code>modules/</code> directory next, the four folders that will each own one piece of the platform, starting with their <code>versions.tf</code> files (rule a from the prompt: the kreuzwerker provider must be declared in every module, or <code>terraform init</code> fails in Module 2). Approve to create them.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/c14c91d3-7d74-4e1a-8f69-b8256742bc34/user_cropped_screenshot_996476bf0ab0443baf4be582aa9464e7_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/c14c91d3-7d74-4e1a-8f69-b8256742bc34/user_cropped_screenshot_996476bf0ab0443baf4be582aa9464e7_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="7">
+<li>
+<p>Bob writes the network module. It holds a single resource, the private bridge network <code>lab_net</code> that every container joins, plus an output the other modules use to attach to it. Approve to create it.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/cbc45b0d-3140-4220-8133-7e9bf2f02104/user_cropped_screenshot_893c538188f14e08988a9c2884aac66e_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/cbc45b0d-3140-4220-8133-7e9bf2f02104/user_cropped_screenshot_893c538188f14e08988a9c2884aac66e_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="8">
+<li>
+<p>Bob fills in the three remaining modules (traefik, web, monitoring) and the README. This is the bulk of the code: the container resources with their <code>127.0.0.1</code> port bindings, healthchecks, volumes, and lifecycle blocks. Approve to create them.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/eeef2a83-34b1-45e7-8503-2913ba4b6977/user_cropped_screenshot_b39c7d68473e48f6ae10a35996fb1146_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/eeef2a83-34b1-45e7-8503-2913ba4b6977/user_cropped_screenshot_b39c7d68473e48f6ae10a35996fb1146_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="validation-checks"><strong>Validation checks</strong></h3>
+<p>With the files written, Bob verifies its own output. Every check is a shell command, and each command needs your approval before it runs. The exact sequence varies by run; in this run Bob discovers Terraform is not installed locally and falls back to lighter checks.</p>
+<hr>
+<ol start="9">
+<li>
+<p>The first check is <code>terraform fmt -recursive -check</code>, a read-only formatting pass. Because it is a shell command, the IDE asks for an extra approval: check <strong>I understand the risk</strong>, then approve. Every check from here on needs the same confirmation.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/bf19ffe1-4eaf-4f47-9af3-3521856b455b/user_cropped_screenshot_e84c77cb6d68478c9786cb56e9484e67_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/bf19ffe1-4eaf-4f47-9af3-3521856b455b/user_cropped_screenshot_e84c77cb6d68478c9786cb56e9484e67_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="10">
+<li>
+<p>Then the cross-reference checks: three of them run in sequence, each proving one half of the module contract holds.</p>
+<ul>
+<li>Every <code>var.</code> reference inside a module is declared in that module's <code>variables.tf</code>.</li>
+<li>Every <code>module.X.Y</code> reference in the root matches an output module X actually declares.</li>
+<li>Every argument the root passes into a module block is a variable that module accepts.</li>
+<li>Bob wrote these checks itself. Read the commands before approving — this is Bob defining what "validated" means, then proving it.</li>
+</ul>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/7c684361-50d1-4bb7-bbf8-238127236370/user_cropped_screenshot_83a8aa3658b646f995fc7f99ef93690b_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/7c684361-50d1-4bb7-bbf8-238127236370/user_cropped_screenshot_83a8aa3658b646f995fc7f99ef93690b_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="11">
+<li>
+<p>A final listing confirms the layout is complete, Bob closes out its todo list, and the <code>infra</code> folder appears in the lab directory: everything you just approved is now on disk.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/74d0e321-7577-4efe-a190-ea1a68f9c766/user_cropped_screenshot_8a36e871aa864e8197967766c1bebdbf_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/74d0e321-7577-4efe-a190-ea1a68f9c766/user_cropped_screenshot_8a36e871aa864e8197967766c1bebdbf_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="review-the-generated-files"><strong>Review the generated files</strong></h3>
+<ol start="12">
+<li>
+<p>Expand the <code>infra/terraform/</code> folder to see everything Bob created.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/3b46dccc-5be0-4b38-a807-119fd05634e7/user_cropped_screenshot_fc91269e52194358816b5103da4b0101_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/3b46dccc-5be0-4b38-a807-119fd05634e7/user_cropped_screenshot_fc91269e52194358816b5103da4b0101_text_export.jpeg" alt="" width="600"></a>
+</p>
+<div class="admonition quote">
+<p><strong>One module per component:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>infra/terraform/
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="hll">├── versions.tf                  &lt;- root provider constraint
+</span><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="hll">├── variables.tf                 &lt;- all inputs incl. port vars
+</span><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="hll">├── main.tf                      &lt;- provider + 4 module calls
+</span><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="hll">├── outputs.tf                   &lt;- ports, URLs, tunnel_command
+</span><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="hll">├── terraform.tfvars.example     &lt;- copy to terraform.tfvars, fill in values
+</span><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="hll">├── README.md                    &lt;- init/plan/apply commands
+</span><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>└── modules/
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    ├── network/                 &lt;- the private bridge network (lab_net)
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    │   └── versions.tf  main.tf  outputs.tf
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    ├── traefik/                 &lt;- Traefik container (file provider, no Docker socket)
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    │   └── versions.tf  variables.tf  main.tf  outputs.tf
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    ├── web/                     &lt;- Apache container (init = true for the self-heal demo)
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    │   └── versions.tf  variables.tf  main.tf  outputs.tf
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    └── monitoring/              &lt;- Prometheus + Grafana (Loki and Promtail join in Step F)
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        └── versions.tf  variables.tf  main.tf  outputs.tf
+</code></pre></div>
+</div>
+</li>
+</ol>
+<hr>
+<h3 id="readmemd"><strong>README.md</strong></h3>
+<p>Bob also writes a <code>README.md</code> inside <code>infra/terraform/</code>, documenting the layer end to end:</p>
+<ul>
+<li><strong>Layout</strong>: the file tree above, with the purpose of each file and module.</li>
+<li><strong>Quick start</strong>: the exact run order, fill in <code>terraform.tfvars</code>, run the Ansible bootstrap first, then <code>init</code>, <code>plan</code>, <code>apply</code>, and open the SSH tunnels.</li>
+<li><strong>Expected plan</strong>: what the first <code>terraform plan</code> should report, so you know a healthy run when you see one.</li>
+<li><strong>Idempotency</strong>: why a second <code>plan</code> must show no changes, and which <code>lifecycle</code> block makes that true.</li>
+<li><strong>Design decisions</strong>: the reasoning behind the file provider, <code>init = true</code> on Apache, and the loopback-only port bindings.</li>
+<li><strong>Tear-down</strong>: how to kill the tunnel and destroy the stack, with a warning that destroying removes the data volumes.</li>
+</ul>
+<p>It doubles as a reference when you deploy in Module 2.</p>
+<hr>
+<h3 id="what-to-check-before-moving-on_1"><strong>What to check before moving on</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">WHY THE CONTRACT IS IN THE PROMPT</p>
+<p>Left to itself, Bob picks reasonable but different names on every run: <code>web</code> instead of <code>apache_web</code>, <code>admin</code> instead of <code>labadmin</code>, <code>traefik_remote_port</code> instead of <code>traefik_dashboard_url</code>. Each one is fine in isolation and each one breaks a command in Module 2 or 3 that was written against the other name. Naming the contract up front is what makes the rest of the lab reproducible.</p>
+</div>
+<ul>
+<li>Every <code>ports</code> block sets <code>ip = "127.0.0.1"</code>: this is the lab's entire security model (rule b)</li>
+<li>A <code>versions.tf</code> declaring <code>kreuzwerker/docker</code> exists in the root <strong>and in every module</strong>, otherwise <code>terraform init</code> fails in Module 2 (rule a)</li>
+<li>Every container has <code>lifecycle { ignore_changes = [log_opts, user, working_dir, command] }</code>, otherwise every future <code>terraform plan</code> shows phantom drift (rule c)</li>
+<li>Traefik uses the <strong>file provider</strong> rather than docker auto-discovery (rule d)</li>
+<li>The web container sets <code>init = true</code>; Module 3's self-healing demo is impossible without it (rule e)</li>
+<li>Secrets appear only as variable references (<code>var.grafana_admin_password</code>), never literal values, and <code>terraform.tfvars.example</code> covers all inputs</li>
+<li>The contract holds: containers are named <code>traefik</code>, <code>apache_web</code>, <code>prometheus</code>, <code>grafana</code>; <code>grafana_admin_user</code> defaults to <code>labadmin</code>; <code>outputs.tf</code> declares <code>app_url</code>, <code>traefik_dashboard_url</code>, <code>grafana_url</code>, <code>prometheus_url</code>, <code>grafana_admin_user</code>, <code>tunnel_command</code>. Module 2 calls every one of those by name</li>
+</ul>
+<hr>
+<h2 id="iv-step-c-generate-the-ansible-layer"><strong>iv. STEP C: GENERATE THE ANSIBLE LAYER</strong></h2>
+<p>Now for the other half. Ansible handles everything Terraform does not: preparing the host itself (installing headless Rancher Desktop) and generating the content the containers serve. That content comprises the landing page, the Traefik routes, the Prometheus scrape config, and the Grafana dashboard.</p>
+<hr>
+<ol>
+<li>
+<p>Copy and paste the contents of the following code block into the Agentic Sidebar, then hit <span class="keys"><kbd class="key-enter">Enter</kbd></span> to eexecute. Since it is long, Bob may show it as a collapsed window — <strong>click</strong> the "copy" icon next to the text block to ensure you've captured the entire statement. Bob stays in <strong>Agent</strong> mode from Step B.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Generate an Ansible layout under infra/ansible/ with an inventory file inventory.ini (using ansible_port, ansible_user and ansible_ssh_private_key_file so any non-default SSH port is supported), a top-level site.yml and roles:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>In inventory.ini, write ansible_ssh_private_key_file as an absolute path and wrap the value in double quotes. INI inventory splits host lines on whitespace, so an unquoted path containing a space (a lab folder named "IBM BOB DEV OPS") fails to parse; Ansible then falls back to implicit localhost and silently runs every task against the operator's laptop instead of the server. A relative path breaks the same way whenever a command runs from a directory other than infra/ansible. Also set private_key_file in ansible.cfg as a fallback.
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>- common (kernel sysctls, journald limits - leave ufw alone, no public ports are used)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>- docker (install headless Rancher Desktop if not present — the standalone rdd daemon binary from the rancher-desktop-2 GitHub releases, pinned to an exact release tag (v2.0.0-alpha.1 at time of writing) and never "latest": rdd is alpha and has no upgrade path between versions, so an unpinned install breaks this lab the day the next alpha ships. NOT the Rancher Desktop GUI app and NOT the rancher/rancher server image, neither of which runs on a headless SSH-only host. Run it as a systemd service so the engine survives reboots and SSH disconnects, and expose its Docker-compatible socket at the standard /var/run/docker.sock path so the Terraform provider and every docker command in this lab work unchanged — rdd's socket path is not documented, so discover it at runtime and then symlink it to /var/run/docker.sock rather than hardcoding a guess. rdd runs the Moby engine inside a Lima VM, so the host filesystem is NOT the daemon's filesystem: add /opt/lab to rdd's VM mount list as a writable mount before any container starts, and verify from inside Rancher Desktop that a file Ansible rendered on the host is actually readable there. Do not assume the bind mount resolved. Add the SSH user to the docker group only if the socket turns out to need it, set log driver = json-file with rotation, and configure a daily prune timer, noting in the README if rdd's engine does not support either)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>- web_content (render the Apache vhost and landing page from Jinja templates into a host bind-mount)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>- monitoring_content (Prometheus scrape config, Grafana datasource provisioning and a starter dashboard JSON)
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>Every task must be idempotent and tagged. Use an ansible-vault-friendly variable layout with group_vars/all/vars.yml and group_vars/all/vault.yml. Provide an ansible-lint-clean output and a one-liner to run the full playbook.
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>Terraform mounts these exact host directories, so create them and render into them with no extra nesting:
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>- /opt/lab/traefik/dynamic/routes.yml   one router matching PathPrefix(`/`) on the web entrypoint, service http://apache_web:80. No Host() rule: the operator arrives through a tunnel as localhost, which no Host rule matches.
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>- /opt/lab/web/index.html               the landing page. Its text must contain the word "Welcome", which Part 2 greps for.
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>- /opt/lab/prometheus/prometheus.yml    the scrape config
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>- /opt/lab/grafana/provisioning/        datasource and dashboard-provider files
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>- /opt/lab/grafana/dashboards/          the dashboard JSON
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>Every task that renders a file must be preceded by a task that creates its parent directory with state: directory. This applies to system paths too, not just /opt/lab: /etc/systemd/journald.conf.d does not exist on a fresh Ubuntu 22.04, so templating into it fails the play outright. Create system directories as standalone file tasks, not by adding them to the /opt/lab loop, so the bootstrap and content tag split stays clean.
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>Create every one of those directories mode 0755 and every rendered file mode 0644. The containers run as non-root (Prometheus as nobody, uid 65534), so a directory created 0750 root:root cannot be traversed by the process that has to read the file inside it, and Prometheus crash-loops with "open /etc/prometheus/prometheus.yml: permission denied" while the file itself looks perfectly readable.
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>Prefix every variable a role defines with that role's name — everything in defaults/, everything in vars/, and every register: (monitoring_content_result, not result; web_content_lab_root, not lab_root). ansible-lint's var-naming[no-role-prefix] applies to all three locations, not just register, and every unprefixed one is a separate failure that stops the Part 2 pre-flight before it deploys anything.
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>Start every task and handler name with a capital letter, or ansible-lint fails name[casing] once per task. If you prefix names with the role, capitalise the prefix too (Docker | Install prerequisites, not docker | Install prerequisites).
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>Tag every task in common and docker with `bootstrap` and every task in web_content and monitoring_content with `content`, because Part 2 invokes the playbook by those two tag names and nothing else. If the engine's socket does require group membership, put a meta: reset_connection immediately after the task that adds the SSH user to that group, or the rest of the run keeps the old membership and every docker call fails on the socket. Prove the bootstrap actually worked by running a plain `docker ps` over SSH at the end of the role, not by trusting that the playbook exited zero.
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>Write the dashboard JSON in Grafana's file-provisioning format: title, uid and schemaVersion at the top level, every panel with gridPos, every target with refId. Do not wrap it in a {"dashboard": {...}} envelope, which is the HTTP API format and makes Grafana reject the file with "Dashboard title cannot be empty" and show no dashboards at all. Only query metrics that a scrape target in prometheus.yml actually exports; Traefik and Prometheus itself are the only exporters here, so container and host metrics do not exist and any panel using them renders "No data".
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>Prometheus and Grafana read their config only at startup, and Terraform may have created them before these files existed, so give each a handler that restarts the container when its config changes and that does nothing when the container is not there yet.
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>Leave vault.yml unencrypted and gitignored, and do not set vault_password_file in ansible.cfg. Document the ansible-vault encrypt command in the README as the production step instead. Part 2 runs the playbook non-interactively, so a configured vault password file that does not exist fails every play before it starts.
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>Three details in the observability config that are wrong by default and silently break every dashboard built on them:
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>1. In the Prometheus scrape config, do not attach a static `service` label to any job whose target exports its own `service` label. Prometheus renames the exporter's label to `exported_service` and keeps the static one, so every query filtering on `service` matches nothing while the data sits under a different name. Set `honor_labels: true` on the Traefik job.
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>2. In the Traefik static config, the `metrics.prometheus` block must set `addRoutersLabels: true`, `addEntryPointsLabels: true` and `addServicesLabels: true`. Router-level metrics are off by default, so `traefik_router_*` does not exist unless you ask for it.
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>3. Any log scraper must label every stream with `container_name`, so a panel or pipeline stage can select one container. A single shared `job` label makes every container indistinguishable downstream.
+</code></pre></div>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d2c811a1-1aad-4118-85f9-9df7109cd22a/user_cropped_screenshot_0400c9f0ec974d2cbb4ab7f7b5da13ac_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d2c811a1-1aad-4118-85f9-9df7109cd22a/user_cropped_screenshot_0400c9f0ec974d2cbb4ab7f7b5da13ac_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="bobs-plan"><strong>Bob's plan</strong></h3>
+<ol start="2">
+<li>
+<p>Before writing anything, Bob works out where the two layers meet: the host paths that Terraform's containers mount and that Ansible must therefore populate.</p>
+<table>
+<thead>
+<tr>
+<th>Host path</th>
+<th>What Ansible renders into it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/opt/lab/traefik/dynamic/</code></td>
+<td>Traefik's file-provider routes</td>
+</tr>
+<tr>
+<td><code>/opt/lab/web/</code></td>
+<td>the Apache document root</td>
+</tr>
+<tr>
+<td><code>/opt/lab/prometheus/prometheus.yml</code></td>
+<td>the scrape config</td>
+</tr>
+<tr>
+<td><code>/opt/lab/grafana/provisioning/</code></td>
+<td>the Grafana datasource and dashboards</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li>
+<p>Bob then proposes a todo list and asks you to approve it. It covers the layout, the config files, the four roles, and two self-checks. Read the list first. It is Bob's plan for the whole step, and every item on it is explained further down, at the point where Bob runs it.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/ef9ce38b-f135-41e2-88b8-b42eae34c149/user_cropped_screenshot_6fcd1747cc5941beaece63ba1238aca3_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/ef9ce38b-f135-41e2-88b8-b42eae34c149/user_cropped_screenshot_6fcd1747cc5941beaece63ba1238aca3_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>Your list may include an extra item that Bob added on its own. In this run, Bob re-read the Step B files, found a bug in how a Terraform flag was written, and added the fix to the list. Bob always explains why it added something. Read that explanation, because work you did not ask for is the work most worth checking.</p>
+</li>
+</ol>
+<hr>
+<h3 id="ansible-generation"><strong>Ansible generation</strong></h3>
+<ol start="4">
+<li>
+<p>Bob announces it will write the entire Ansible layout in parallel batches. Approve the todo update.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/9f2d42bb-dd62-4402-9572-cde0a5c8e916/user_cropped_screenshot_f14d3caad40244b59dfa58937ed83a3a_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/9f2d42bb-dd62-4402-9572-cde0a5c8e916/user_cropped_screenshot_f14d3caad40244b59dfa58937ed83a3a_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="5">
+<li>
+<p>Approve again as Bob writes the files. It writes the config first (<code>ansible.cfg</code>, <code>inventory.ini</code>, <code>group_vars</code>, <code>site.yml</code>), then all four roles simultaneously, then the Jinja templates. It finishes with the Grafana dashboard JSON, the most complex artifact. This one approval covers eight of the todo items:</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/1c59125a-8df2-4330-b7d7-f763e42fced2/user_cropped_screenshot_5c2fa710fe9948c1a83c5ec2812eb7bb_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/1c59125a-8df2-4330-b7d7-f763e42fced2/user_cropped_screenshot_5c2fa710fe9948c1a83c5ec2812eb7bb_text_export.jpeg" alt="" width="600"></a>
+</p>
+<table>
+<thead>
+<tr>
+<th>SUB-TASK</th>
+<th>OBJECTIVES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sub-Task 1</td>
+<td>Write <code>ansible.cfg</code>: which inventory to use and how to SSH to the host</td>
+</tr>
+<tr>
+<td>Sub-Task 2</td>
+<td>Write <code>inventory.ini</code> with <code>ansible_port</code>, <code>ansible_user</code>, and the key file, so the non-standard SSH port works</td>
+</tr>
+<tr>
+<td>Sub-Task 3</td>
+<td>Split <code>group_vars/all/vars.yml</code> from <code>vault.yml</code> so secrets can be encrypted later on their own</td>
+</tr>
+<tr>
+<td>Sub-Task 4</td>
+<td>Write <code>site.yml</code>, tagged so Module 2 can run bootstrap and content rendering separately</td>
+</tr>
+<tr>
+<td>Sub-Task 5</td>
+<td>Build the <code>common</code> role: kernel parameters and journal log limits</td>
+</tr>
+<tr>
+<td>Sub-Task 6</td>
+<td>Build the <code>docker</code> role: install Rancher Desktop headless under systemd, expose its socket at <code>/var/run/docker.sock</code>, mount <code>/opt/lab</code> into the Rancher Desktop VM, log rotation, and a daily prune timer</td>
+</tr>
+<tr>
+<td>Sub-Task 7</td>
+<td>Build the <code>web_content</code> role: Traefik's file-provider routes and the Apache landing page</td>
+</tr>
+<tr>
+<td>Sub-Task 8</td>
+<td>Build the <code>monitoring_content</code> role: the Prometheus scrape config and the Grafana provisioning chain</td>
+</tr>
+</tbody>
+</table>
+<p>Bob works outward from the smallest dependency. Sub-tasks 1 to 4 come first because everything else refers to them, since a role cannot resolve a variable <code>group_vars</code> has not declared. The four roles do not depend on each other, so Bob writes them in one parallel batch. The Grafana dashboard JSON comes last, being the largest and most error-prone file.</p>
+</li>
+</ol>
+<hr>
+<h3 id="validation-and-fixes"><strong>Validation and fixes</strong></h3>
+<p>With 23 files written, Bob checks its own work. This run turns into a real bug hunt, and it is worth following closely, because it shows what Bob does when a check fails.</p>
+<hr>
+<ol start="6">
+<li>
+<p>Bob writes a Python script with five static checks. Every YAML file must parse, and every task must carry <code>tags</code>. Every template variable must match a declared <code>vars.yml</code> key, every Jinja template must render, and the dashboard JSON must be valid once the Jinja markers are stripped. This is the todo's two verification items being executed. Approve it.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d8cafaa4-219c-4e5c-926e-3906f5eeec45/user_cropped_screenshot_286172f7672e45b3b7b6a435063c3f45_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d8cafaa4-219c-4e5c-926e-3906f5eeec45/user_cropped_screenshot_286172f7672e45b3b7b6a435063c3f45_text_export.jpeg" alt="" width="600"></a>
+</p>
+<div class="admonition info">
+<p class="admonition-title">VERIFY IDEMPOTENCY PATTERNS ON EVERY TASK</p>
+<p>Bob's self-check for the prompt's "every task must be idempotent" rule: <code>creates:</code> and <code>stat</code> guards that make a task a no-op when the work is already done.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">VERIFY ALL TASKS ARE TAGGED</p>
+<p>Self-check for the other prompt rule, so any slice of the playbook can be run on its own.</p>
+</div>
+<details class="warning">
+<summary>IF THE SCRIPT FAILS ON A MISSING PARSER</summary>
+<p>The script needs PyYAML. If it is not on your machine, Bob installs it, confirms the install, and retries on its own. Approve those commands and the run continues.</p>
+</details>
+</li>
+</ol>
+<hr>
+<ol start="7">
+<li>
+<p>The suite runs against every generated file.</p>
+<ul>
+<li>If a check fails, Bob patches the file and runs the suite again. Sometimes it finds the fault was in its own test rather than in the file.</li>
+<li>Approve each round. What matters is where it ends. Every file should pass, and if Bob dismisses a failure it should be able to say why.</li>
+</ul>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/72928be1-4687-401e-ae7e-845cbe4ea743/user_cropped_screenshot_c5e5cd1cd7d14daeaa8f375065c1c0e3_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/72928be1-4687-401e-ae7e-845cbe4ea743/user_cropped_screenshot_c5e5cd1cd7d14daeaa8f375065c1c0e3_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="8">
+<li>The todo list closes out with every item done, and a final listing confirms the finished tree.</li>
+</ol>
+<hr>
+<h3 id="review-the-generated-files_1"><strong>Review the generated files</strong></h3>
+<ol start="9">
+<li>
+<p>Bob summarises what it generated. The <code>infra</code> folder now sits in the explorer.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/fdd623f1-9594-4dc6-a977-92dd038d7714/user_cropped_screenshot_39ccaa684c7b4b1ab7d31ea6c972acf2_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/fdd623f1-9594-4dc6-a977-92dd038d7714/user_cropped_screenshot_39ccaa684c7b4b1ab7d31ea6c972acf2_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="10">
+<li>
+<p>Expand <code>infra/ansible</code> to see the full layout.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/0787bada-c6e4-4db5-8d80-962c4e081e99/user_cropped_screenshot_a321d1e28d044a029e66c92599b3ae96_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/0787bada-c6e4-4db5-8d80-962c4e081e99/user_cropped_screenshot_a321d1e28d044a029e66c92599b3ae96_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>Where Terraform (Step B) answered "what exists on the server," this layer answers "how it is prepared and what content it serves":</p>
+<div class="admonition warning">
+<p>The exact file names Bob generates may vary from run to run.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>infra/ansible/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── group_vars/
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>│   └── all/
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="hll">│       ├── vars.yml                       &lt;- shared variables
+</span><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="hll">│       └── vault.yml                      &lt;- secrets, to be encrypted with ansible-vault
+</span><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>├── roles/
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>│   ├── common/                            &lt;- kernel sysctls, journald limits
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>│   │   ├── handlers/
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>│   │   ├── meta/
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>│   │   ├── tasks/
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>│   │   └── templates/
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>│&nbsp;&nbsp; ├── docker/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;- Rancher Desktop install, socket, /opt/lab VM mount, prune timer
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>│   │   ├── handlers/
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>│   │   ├── meta/
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>│   │   ├── tasks/
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>│   │   └── templates/
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="hll">│&nbsp;&nbsp; │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── daemon.json.j2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;- engine daemon config: log rotation (may be absent, Rancher Desktop does not always read it)
+</span><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>│   ├── monitoring_content/
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>│   │   ├── meta/
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>│   │   ├── tasks/
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>│   │   │   └── main.yml
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="hll">│   │   └── templates/                     &lt;- prometheus.yml.j2 + the Grafana
+</span><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>│   │                                         provisioning chain: datasource,
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>│   │                                         dashboard provider, dashboard JSON
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>│   └── web_content/
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>│       ├── meta/
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>│       │   └── main.yml
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>│       ├── tasks/
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>│       │   └── main.yml
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>│       └── templates/
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="hll">│           ├── index.html.j2              &lt;- the landing page Apache serves
+</span><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="hll">│           └── routes.yml.j2              &lt;- the Traefik file-provider routes
+</span><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="hll">├── ansible.cfg                            &lt;- Ansible behavior: inventory path, SSH settings
+</span><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="hll">├── inventory.ini                          &lt;- the target server: host, port, user, key
+</span><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="hll">└── site.yml                               &lt;- single entrypoint, applies all roles in order
+</span></code></pre></div>
+</li>
+</ol>
+<hr>
+<h3 id="what-to-check-before-moving-on_2"><strong>What to check before moving on</strong></h3>
+<ul>
+<li><code>inventory.ini</code> sets <code>ansible_port</code>, <code>ansible_user</code>, and <code>ansible_ssh_private_key_file</code>. These tell Ansible how to SSH into the server; without them it assumes port 22 and fails to connect at all on a non-default port like TechZone's</li>
+<li>All four roles are present: <code>common</code>, <code>docker</code>, <code>web_content</code>, <code>monitoring_content</code></li>
+<li>Every task is tagged and idempotent; Module 2 runs this playbook more than once, so a second run must change nothing</li>
+<li>The two tags Module 2 uses actually exist: <code>ansible-playbook site.yml --list-tasks --tags bootstrap</code> and <code>--tags content</code> each list tasks rather than nothing</li>
+<li>If the role adds the SSH user to a group for socket access, a <code>meta: reset_connection</code> follows immediately after it</li>
+<li><code>/opt/lab</code> is mounted into the Rancher Desktop VM and the role proves it: a file Ansible rendered on the host must be readable from inside Rancher Desktop. Without this every bind mount silently resolves to an empty directory, and the whole stack comes up "healthy" while serving nothing.</li>
+<li>Secrets live in <code>group_vars/all/vault.yml</code> and that file is gitignored. It stays unencrypted for the lab, so Module 2 can run the playbook without a vault prompt</li>
+<li>The <code>docker</code> role installs Rancher Desktop only if missing, pinned to an exact release tag, runs it as a systemd service, and ends by proving the engine works with a plain <code>docker ps</code> over SSH</li>
+</ul>
+<hr>
+<h2 id="v-step-d-security-secrets-review"><strong>v. STEP D: SECURITY &amp; SECRETS REVIEW</strong></h2>
+<p>In Steps B and C, Bob wrote a lot of code quickly, and you are about to run it against a real server. Before that happens, this step turns Bob into its own reviewer: it re-reads everything it just generated, checking for the kinds of mistakes that can hurt in production. For example:</p>
+<ul>
+<li>A password sitting in a file</li>
+<li>A port accidentally open to the whole internet instead of loopback</li>
+<li>A container running with more privileges than it needs</li>
+</ul>
+<hr>
+<ol>
+<li>
+<p>Paste the prompt below into Bob's chat and send it. Bob stays in <strong>Agent</strong> mode.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Audit the generated Terraform and Ansible for: secrets in code or state, any port bound to 0.0.0.0 instead of 127.0.0.1, weak Grafana defaults, container privilege escalation, exposed Docker socket without read-only mode, missing resource limits and missing log drivers. For each finding give severity (low/med/high), exploit scenario in one line and the minimal fix as a unified diff. Then propose a remote-state backend (S3+DynamoDB or equivalent) with state encryption and locking, and an ansible-vault strategy for the Grafana admin password.
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Four things are already decided. List them as accepted risks with the reason and leave the code alone:
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>- The Traefik dashboard and API stay unauthenticated. Only the operator's own SSH tunnel reaches them, and a generated BasicAuth hash is a password nobody can type.
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>- There is no TLS. SSH is the encryption layer and every operator URL is plain http on localhost.
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>- State stays local. Write the backend as a proposal; do not add a backend block, because terraform init would then try to resolve it and Part 2 has no cloud credentials.
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>- vault.yml stays unencrypted and gitignored, because Part 2 runs the playbook non-interactively.
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>Do not rename anything Part 2 depends on: the container names, grafana_admin_user, the bootstrap and content tags, or the /opt/lab paths. If a fix genuinely needs one of those changed, raise it as a finding and stop rather than applying it. If you harden SSH host key checking, use StrictHostKeyChecking=accept-new and never yes, because Part 2 runs unattended and yes turns a first connection into a prompt nobody answers.
+</code></pre></div>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/a09203e4-0617-48e7-b847-b61c41d992b5/user_cropped_screenshot_4290d2d5cd014927a60e371c4332d092_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/a09203e4-0617-48e7-b847-b61c41d992b5/user_cropped_screenshot_4290d2d5cd014927a60e371c4332d092_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="the-audit"><strong>The audit</strong></h3>
+<ol start="2">
+<li>
+<p>Bob re-reads everything it wrote in Steps B and C, then turns the audit into a todo list of findings ranked by severity. Approve it, then read the findings before you approve any fix. This table is the security lesson of the module:</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/0d367160-f87e-49f2-bcc3-4e3a761af265/user_cropped_screenshot_d01a57d1531f4e5499ebaba3ad0d7a9e_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/0d367160-f87e-49f2-bcc3-4e3a761af265/user_cropped_screenshot_d01a57d1531f4e5499ebaba3ad0d7a9e_text_export.jpeg" alt="" width="600"></a>
+</p>
+<table>
+<thead>
+<tr>
+<th>FINDING</th>
+<th>SEVERITY</th>
+<th>THE FIX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-01 <code>grafana_admin_password</code> written to <code>terraform.tfstate</code> in plaintext</td>
+<td>HIGH</td>
+<td>Mark the output <code>sensitive = true</code>; the real cure is the encrypted remote backend in F-04</td>
+</tr>
+<tr>
+<td>F-02 <code>vault.yml</code> holds the secret unencrypted, so any <code>git add -A</code> commits it</td>
+<td>HIGH</td>
+<td>A gitignore entry, plus the documented <code>ansible-vault encrypt</code> command for production</td>
+</tr>
+<tr>
+<td>F-04 No remote state backend, so state is unencrypted, unlocked, and unshared</td>
+<td>HIGH</td>
+<td>The S3 + DynamoDB design, written up as documentation rather than applied</td>
+</tr>
+<tr>
+<td>F-05 <code>StrictHostKeyChecking=no</code> lets an impostor server intercept the SSH connection</td>
+<td>MED</td>
+<td><code>accept-new</code>, which pins the key on first use and still never prompts</td>
+</tr>
+<tr>
+<td>F-06 Grafana's <code>GF_SECURITY_*</code> settings left at defaults</td>
+<td>MED</td>
+<td>Set the hardening environment variables explicitly</td>
+</tr>
+<tr>
+<td>F-07 No resource limits, so one runaway container can starve the host</td>
+<td>MED</td>
+<td>Memory and CPU limits on every container</td>
+</tr>
+<tr>
+<td>F-08 No <code>log_driver</code> block, so containers log without bounds if <code>daemon.json</code> is wrong</td>
+<td>MED</td>
+<td>Declare the log driver per container</td>
+</tr>
+<tr>
+<td>F-09 No <code>no_log</code>, so sensitive tasks print the password into playbook output</td>
+<td>MED</td>
+<td><code>no_log: true</code> on the tasks handling <code>grafana_admin_password</code></td>
+</tr>
+<tr>
+<td>F-10 No <code>.gitignore</code> for <code>terraform.tfvars</code> and <code>*.pem</code></td>
+<td>LOW</td>
+<td>Ignore the real variable values and the SSH private key</td>
+</tr>
+<tr>
+<td>F-11 Promtail mounts <code>docker.sock</code> to discover containers</td>
+<td>LOW</td>
+<td>Mount it read-only and narrow the bind to what Promtail actually reads</td>
+</tr>
+</tbody>
+</table>
+<p>Bob ranks by severity rather than by file, so the list doubles as a priority order.</p>
+<div class="admonition note">
+<p class="admonition-title">THE THREE HIGHS ARE A SINGLE PROBLEM</p>
+<p>F-01, F-02 and F-09 are all the same Grafana password, leaking through three different channels:</p>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Where it leaks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-01</td>
+<td>Terraform state</td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>git history</td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>playbook output</td>
+</tr>
+</tbody>
+</table>
+<p>F-04 is what would contain the first of them in production, and it is the one finding you deliberately do not apply here.</p>
+</div>
+<p>Now notice what is <strong>missing</strong> from the table: the Traefik dashboard.</p>
+<p>Left unconstrained, Bob rates <code>api.insecure=true</code> a HIGH and puts a BasicAuth middleware in front of it, generating the password hash itself. The dashboard then answers 401 for the rest of the lab, and nobody knows the credentials.</p>
+<p>The accepted-risks block in your prompt is what keeps it out of the findings. Bob still records its reasoning in the report either way.</p>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li>
+<p>Approve the todo list. Bob applies the fixes file by file, then writes the remote state backend and the ansible-vault strategy doc the prompt asked for. Approve the todo updates as it goes.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/de408099-d9b0-4607-8034-f21f98b58fcb/user_cropped_screenshot_d0f63f4bca914ed5a4e7c0fc26df76b3_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/de408099-d9b0-4607-8034-f21f98b58fcb/user_cropped_screenshot_d0f63f4bca914ed5a4e7c0fc26df76b3_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li>
+<p>Afterwards, Bob produces a <strong>Security Audit</strong> report. Each finding comes with its severity, a one-line exploit scenario, and the exact diff applied, followed by the accepted risks it left alone. Click <strong>Open</strong> on the report card and read it end to end.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/1014bccd-1c3a-4d9e-bb5c-d64c69fa133b/user_cropped_screenshot_cea168433b894c4ca11e60afc6e782d5_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/1014bccd-1c3a-4d9e-bb5c-d64c69fa133b/user_cropped_screenshot_cea168433b894c4ca11e60afc6e782d5_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>In this run Bob applied every fix itself, so your job shifts from applying to verifying:</p>
+<ol>
+<li><strong>Read each finding in the report</strong> and decide whether you agree it was a real problem and that the fix is right.</li>
+<li><strong>Spot-check the diffs</strong> in the changed files, the same way you reviewed Steps B and C.</li>
+<li><strong>Ask Bob to revert</strong> anything you disagree with, and re-run the audit prompt if you want a clean pass to confirm.</li>
+</ol>
+<p>The result of this step is what you deploy in Module 2: code that has already survived a security review before it ever touched the server.</p>
+</li>
+</ol>
+<hr>
+<h3 id="what-to-check-before-moving-on_3"><strong>What to check before moving on</strong></h3>
+<ul>
+<li>Every finding has all three parts: severity, exploit scenario, and a concrete diff; a finding without a fix is not actionable</li>
+<li>Every <strong>high-severity</strong> finding is applied.</li>
+<li>The re-run of the audit prompt comes back clean (or only with findings you have consciously accepted)</li>
+<li>The accepted risks survived the audit untouched: no BasicAuth middleware appeared in front of the Traefik dashboard, no TLS was added, no <code>backend</code> block was written, and <code>vault.yml</code> is still readable</li>
+<li>Nothing from the platform contract was renamed. Run the contract check in <a href="#vi-review-approval">Review &amp; Approval</a> below before you move on</li>
+<li>Bob wrote the two extras as documentation only: the remote state backend with encryption and locking, and the ansible-vault strategy for the Grafana admin password</li>
+</ul>
+<hr>
+<h2 id="vi-review-approval"><strong>vi. REVIEW &amp; APPROVAL</strong></h2>
+<p>Bob has now generated everything Module 2 will deploy. Before you approve it, verify the properties that matter. Each check below is a command you paste into the Bob IDE terminal, and each catches a specific mistake.</p>
+<hr>
+<p><strong>1. Every published port binds to loopback</strong></p>
+<p>Every line this prints must say <code>127.0.0.1</code>. A single <code>0.0.0.0</code> means a service is exposed to the internet and the security model is broken.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>grep<span class="w"> </span>-rn<span class="w"> </span><span class="s1">'ip *='</span><span class="w"> </span>infra/terraform<span class="w"> </span>--include<span class="o">=</span><span class="s1">'*.tf'</span>
+</code></pre></div>
+<hr>
+<p><strong>2. Five <code>versions.tf</code> files exist — the root plus one per module</strong></p>
+<p>A missing one means <code>terraform init</code> fails in Module 2, because Terraform looks for the non-existent <code>hashicorp/docker</code> provider instead of <code>kreuzwerker/docker</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ls<span class="w"> </span>infra/terraform/versions.tf<span class="w"> </span>infra/terraform/modules/*/versions.tf
+</code></pre></div>
+<hr>
+<p><strong>3. The Apache container sets <code>init = true</code></strong></p>
+<p>Module 3's self-healing demo is impossible without it: httpd running as PID 1 cannot be killed from inside the container.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>grep<span class="w"> </span>-n<span class="w"> </span><span class="s1">'init'</span><span class="w"> </span>infra/terraform/modules/web/main.tf
+</code></pre></div>
+<hr>
+<p><strong>4. No literal passwords in the code</strong></p>
+<p>Every line this prints must be a variable reference or declaration (<code>var.grafana_admin_password</code>), never an actual password value.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>grep<span class="w"> </span>-rni<span class="w"> </span><span class="s1">'password'</span><span class="w"> </span>infra/terraform<span class="w"> </span>--include<span class="o">=</span><span class="s1">'*.tf'</span>
+</code></pre></div>
+<hr>
+<p><strong>5. The container names Modules 2 and 3 hardcode</strong></p>
+<p>All four must print. A rename here breaks the self-healing demo, which addresses containers by name.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>grep<span class="w"> </span>-rn<span class="w"> </span><span class="s1">'name *= *"'</span><span class="w"> </span>infra/terraform/modules<span class="w"> </span>--include<span class="o">=</span><span class="s1">'*.tf'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'traefik|apache_web|prometheus|grafana'</span>
+</code></pre></div>
+<hr>
+<p><strong>6. The output names Module 2 reads back after apply</strong></p>
+<p>All six must print.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>grep<span class="w"> </span>-n<span class="w"> </span><span class="s1">'^output'</span><span class="w"> </span>infra/terraform/outputs.tf
+</code></pre></div>
+<hr>
+<p><strong>7. The two Ansible tags Module 2 invokes</strong></p>
+<p>Both must list tasks. A tag that matches nothing makes Module 2 skip that half of the deployment silently.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span><span class="w"> </span>infra/ansible
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>ansible-playbook<span class="w"> </span>site.yml<span class="w"> </span>--list-tasks<span class="w"> </span>--tags<span class="w"> </span>bootstrap<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-5
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>ansible-playbook<span class="w"> </span>site.yml<span class="w"> </span>--list-tasks<span class="w"> </span>--tags<span class="w"> </span>content<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-5
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nb">cd</span><span class="w"> </span>../..
+</code></pre></div>
+<hr>
+<p><strong>8. The accepted risks are still accepted</strong></p>
+<p>The Traefik dashboard carries no BasicAuth, TLS is absent, no remote backend block exists, and <code>vault.yml</code> remains readable. The last command must <em>not</em> print <code>$ANSIBLE_VAULT;1.1</code> — an encrypted vault file makes Module 2's non-interactive run fail before it starts.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>grep<span class="w"> </span>-rn<span class="w"> </span><span class="s1">'basicauth\|users *=\|tls\|acme'</span><span class="w"> </span>infra/terraform<span class="w"> </span>--include<span class="o">=</span><span class="s1">'*.tf'</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>grep<span class="w"> </span>-rn<span class="w"> </span><span class="s1">'backend "'</span><span class="w"> </span>infra/terraform<span class="w"> </span>--include<span class="o">=</span><span class="s1">'*.tf'</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>head<span class="w"> </span>-1<span class="w"> </span>infra/ansible/group_vars/all/vault.yml
+</code></pre></div>
+<hr>
+<p><strong>9. The linters actually pass</strong></p>
+<p>Module 2's pre-flight runs both of these and stops the deployment if either fails, without fixing anything. Prove it here instead.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>terraform<span class="w"> </span>fmt<span class="w"> </span>-check<span class="w"> </span>-recursive<span class="w"> </span>infra/terraform
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span><span class="w"> </span>infra/ansible<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ansible-lint<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>../..
+</code></pre></div>
+<p>Both must print nothing and exit 0. Run them yourself even if Bob's Step E report says the code is clean.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>terraform fmt -check</code> PRINTS A FILENAME</summary>
+<p><strong>Cause</strong> — that file's <code>=</code> signs are misaligned. Nothing else.</p>
+<p><strong>Fix</strong> — reformat in place:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>terraform<span class="w"> </span>fmt<span class="w"> </span>-recursive<span class="w"> </span>infra/terraform
+</code></pre></div>
+<p>This is whitespace only and cannot change what your infrastructure does.</p>
+<p>Always use <code>-recursive</code>. Plain <code>terraform fmt -check</code> looks at the current directory only and never descends into <code>modules/</code>, so it can pass while a module is still unformatted.</p>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>ansible-lint</code> REPORTS DOZENS OF FAILURES</summary>
+<p><strong>Cause</strong> — two rules account for almost all of them:</p>
+<ul>
+<li><code>var-naming[no-role-prefix]</code> — a variable in <code>defaults/</code>, <code>vars/</code> or <code>register:</code> without its role-name prefix</li>
+<li><code>name[casing]</code> — a task name not starting with a capital letter</li>
+</ul>
+<p>Both are cosmetic, but each occurrence counts as its own failure, so a handful of naming choices becomes 60+ findings.</p>
+<p><strong>Fix</strong> — paste the output back to Bob and have it correct the names before you approve the step.</p>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: BOB'S STEP E REPORT SAYS CLEAN BUT THE LINTERS DISAGREE</summary>
+<p><strong>Cause</strong> — Step E can be answered from Bob's model of what the linters would say rather than by running them. The report then reads clean while the real tools fail.</p>
+<p><strong>Fix</strong> — trust the commands above rather than the report. Show Bob the real output and have it fix what the tools actually found.</p>
+</details>
+<p>Then two things to read rather than grep:</p>
+<ul>
+<li><strong>The architecture document from Step A</strong> — does it still match what Steps B and C actually generated?</li>
+<li><strong>The audit findings from Step D</strong> — is every high-severity finding either fixed or something you consciously decided to accept?</li>
+</ul>
+<p>If a check fails, tell Bob what you found and have it fix the code, then re-run the check.</p>
+<hr>
+<h2 id="vii-key-takeaways"><strong>vii. KEY TAKEAWAYS</strong></h2>
+<ul>
+<li>A one-paragraph requirement, enhanced into a structured spec and answered in Plan mode, produces a reviewable design document before any code exists.</li>
+<li>The prompts pin every decision Bob would otherwise ask about, and they name the contract (container names, outputs, tags, paths) that Modules 2 and 3 depend upon.</li>
+<li>Terraform owns what exists on the server; Ansible owns how the host is prepared and what content the containers serve, and both layers must name the same paths.</li>
+<li>Bob validates its own output with checks it wrote itself; read those commands before approving them, and run the linters yourself regardless.</li>
+<li>The security audit is constrained by an accepted-risks block, which is what keeps the tunnel-only Traefik dashboard out of the findings.</li>
+<li>Whatever passes the review checks here is exactly what Module 2 deploys.</li>
+</ul>
+<p>
+Continue to <a href="../1-2/" target="_blank">Validation &amp; Enhancement</a>, where the same plan-review loop adds four more steps. An idempotency, lint, and drift audit comes first, followed by the observability stack (Loki + Promtail). A disaster-recovery runbook and a CI/CD pipeline complete the module.</p>
+<hr></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Registration and Setup">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Registration and Setup
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../1-2/" class="md-footer__link md-footer__link--next" aria-label="Next: Validation and Enhancement">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Validation and Enhancement
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2026 IBM
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.annotate", "content.code.copy", "content.code.select", "navigation.footer"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+        <script src="../_static/hide-toc-nav.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
