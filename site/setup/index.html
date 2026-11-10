@@ -1,0 +1,1996 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="DevOps Infrastructure as Code with IBM Bob">
+      
+      
+        <meta name="author" content="Christopher Bienko (cdbienko@us.ibm.com)">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../1-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Registration and Setup - DevOps Infrastructure as Code with IBM Bob</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../styles/override-print.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#registration-and-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-header__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevOps Infrastructure as Code with IBM Bob
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Registration and Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DevOps Infrastructure as Code with IBM Bob" class="md-nav__button md-logo" aria-label="DevOps Infrastructure as Code with IBM Bob" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    DevOps Infrastructure as Code with IBM Bob
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../toc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table of Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration and Setup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration and Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL CONFIGURE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-reserving-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. RESERVING THE SERVER
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-software-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. SOFTWARE CONFIGURATION
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iii. SOFTWARE CONFIGURATION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required software
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-terraform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Terraform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-and-verification-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation and verification checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-workspace-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. WORKSPACE CONFIGURATION
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iv. WORKSPACE CONFIGURATION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launch-bob-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Launch Bob IDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-the-lab-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the lab folder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirm-the-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm the workspace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-the-integrated-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the integrated terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-the-bob-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check the Bob settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-connecting-to-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. CONNECTING TO THE SERVER
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="v. CONNECTING TO THE SERVER">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set environment variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-ssh-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test SSH connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vi. TROUBLESHOOTING
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-ready-to-proceed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vii. READY TO PROCEED
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture and Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Enhancement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Deploy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Deploy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automated Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Operate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Operate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring and Observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Healing and Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#i-what-you-will-configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        i. WHAT YOU WILL CONFIGURE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-reserving-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ii. RESERVING THE SERVER
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-software-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iii. SOFTWARE CONFIGURATION
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iii. SOFTWARE CONFIGURATION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required software
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-terraform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Terraform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-and-verification-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation and verification checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-workspace-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iv. WORKSPACE CONFIGURATION
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iv. WORKSPACE CONFIGURATION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launch-bob-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Launch Bob IDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-the-lab-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the lab folder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirm-the-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm the workspace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-the-integrated-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open the integrated terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-the-bob-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check the Bob settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-connecting-to-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v. CONNECTING TO THE SERVER
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="v. CONNECTING TO THE SERVER">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set environment variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-ssh-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test SSH connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vi. TROUBLESHOOTING
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-ready-to-proceed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vii. READY TO PROCEED
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><p><strong>GETTING STARTED</strong></p>
+<h1 id="registration-and-setup"><strong>REGISTRATION AND SETUP</strong></h1>
+<hr>
+<h2 id="i-what-you-will-configure"><strong>i. WHAT YOU WILL CONFIGURE</strong></h2>
+<p></p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls="" alt="type:video"><source src="../_videos/Registration%20and%20Setup%20%5BBob%20DevOps%20L3%5D.mp4" type="video/mp4"></video></div><p></p>
+<div class="admonition quote">
+<p>Christopher Bienko <em>(AI Enablement GTM Product Manager)</em> provides an overview of the <em>Registration and Setup</em> module for the hands-on enablement. <strong><a href="https://ibm.seismic.com/Link/Content/DChJWBFJ4W2D6GqRbXgPWmdVWDH3" target="_blank">[2 min]</a></strong></p>
+</div>
+<p>Before beginning <a href="../1-1/" target="_blank">Module 1 | Design</a> of the hands-on lab, three components must first be configured.</p>
+<div class="admonition quote">
+<ol>
+<li>A <strong>remote Ubuntu server</strong>, reserved through <strong>IBM Technology Zone (ITZ)</strong>.</li>
+<li>The <strong>software and tools on your local machine</strong>: Bob IDE, Terraform and Ansible, plus a few standard utilities.</li>
+<li>A <strong>working SSH connection</strong> between Bob IDE and the ITZ remote server.</li>
+</ol>
+</div>
+<p>Detailed instructions on how to acquire and configure these components are provided within this hands-on section in the pages below.</p>
+<hr>
+<h2 id="ii-reserving-the-server"><strong>ii. RESERVING THE SERVER</strong></h2>
+<p>The first order of business will be booking an Ubuntu server image <strong>via <a href="https://techzone.ibm.com" target="_blank">IBM Technology Zone</a></strong>, IBM's platform for reserving demo and lab environments. The reservation provisions an Ubuntu server for you and hands you everything needed to reach it: a public IP address and SSH port, along with a username and a private key file.</p>
+<hr>
+<ol>
+<li>
+<p>Sign in at <strong><a href="https://techzone.ibm.com" target="_blank">techzone.ibm.com</a></strong> with your IBMid, then search for the lab environment:</p>
+<div class="admonition warning">
+<p class="admonition-title">IBM TECHNOLOGY ZONE COLLECTION</p>
+<p><strong>URL: <a href="https://techzone.ibm.com/collection/bob-business-partner-enablement/environments" target="_blank">https://techzone.ibm.com/collection/bob-business-partner-enablement/environments</a></strong></p>
+<p><strong>NAME: <code>Ubuntu VPC 24-04-04</code></strong></p>
+</div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-1.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-1.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>Within the <code>Ubuntu VPC 24-04-04</code> tile, hover over the <strong>ibmcloud-2 environment</strong> button and click <strong>Reserve</strong> to launch the reservation configuration tool.</li>
+</ol>
+<hr>
+<ol start="3">
+<li>
+<p><em>Step 1: General</em> of the configuration process will ask you to specify a <strong>Name</strong> and <strong>Description</strong> for your reservation. When ready, click <strong>Next</strong> in the bottom-right corner to continue.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-2.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-2.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li>
+<p><em>Step 2: Business purpose</em> must be set to <strong>Test</strong> in order to bypass the need for an opportunity number. If you mistakenly click the wrong option, or if the reservation system does not allow you to continue without an opportunity number, exit out from this page and try again (making sure to only click <em>Test</em>). When ready, click <strong>Next</strong> to continue.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-3.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-3.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="5">
+<li>
+<p><em>Step 3: Deployment</em> will ask you to specify the <strong>Geography</strong> for your deployment. Select the data center location that is closest to you. When ready, click <strong>Next</strong> to continue.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-4.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-4.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="6">
+<li>
+<p><em>Step 4: Scheduling</em> will ask you to specify the go-live and termination dates for your entitlement. Choose a window that comfortably covers the time you expect to spend on this lab. If the entitlement lapses before you finish, you can submit a new request using these same instructions. When ready, click <strong>Next</strong> to continue.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-5.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-5.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="7">
+<li><em>Step 5: Configure</em> can be left <strong>unmodified</strong>. When ready, click <strong>Next</strong> to continue.</li>
+</ol>
+<hr>
+<ol start="8">
+<li>
+<p><em>Step 6: Review and submit</em> will ask you to review your configuration settings before submitting the request. Scroll down through your reservation details and, if you approve, check the <strong>I agree to IBM Technology Zone's terms &amp; conditions and user security policies.</strong> box at the bottom of the page. When ready, click <strong>Submit</strong> to initiate the reservation request.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-6.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-6.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="9">
+<li>
+<p>The web browser will redirect automatically to IBM Technology Zone's <em>My requests</em> dashboard. From this page, you can monitor and track the progression of your reservation request as it moves from <code>Scheduled</code> to <code>Provisioning</code> to <code>Ready</code>. <strong>Wait</strong> until the request is marked as <code>Ready</code> before advancing.</p>
+<p>Average deployment times are roughly <strong><code>20 minutes</code></strong> or less.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-7.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-7.png" width="600"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-8.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-8.png" width="600"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-9.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-9.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="10">
+<li>
+<p>When the reservation is <code>Ready</code>, you will receive an email to your inbox providing you with a link to the environment <strong>and</strong> the same details will also be accessible via the <em>My requests</em> dashboard (where you were tracking the reservation request).</p>
+<p>Click either the <strong>View your request</strong> link in the email body <em>OR</em> click the arrow to the left of your reservation name on the <em>My requests</em> dashboard to expand details about the request.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../_attachments/setup-ubuntu-10.png" data-desc-position="bottom"><img alt="" src="../_attachments/setup-ubuntu-10.png" width="600"></a></p>
+</li>
+</ol>
+<hr>
+<ol start="11">
+<li>
+<p>The environment details page contains everything the lab's environment variables need:</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d447c367-9a25-4d17-ad1d-101fc6599c6d/user_cropped_screenshot_43ca71a642ce40ddb3f1a892f0e8336d_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d447c367-9a25-4d17-ad1d-101fc6599c6d/user_cropped_screenshot_43ca71a642ce40ddb3f1a892f0e8336d_text_export.jpeg" alt="" width="600"></a>
+</p>
+<table>
+<thead>
+<tr>
+<th>Details page shows</th>
+<th>You'll use it as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public IP address</td>
+<td><code>TARGET_HOST</code></td>
+</tr>
+<tr>
+<td>SSH port (often non-standard, e.g. <code>2223</code>)</td>
+<td><code>SSH_PORT</code></td>
+</tr>
+<tr>
+<td>Username (typically <code>itzuser</code>)</td>
+<td><code>SSH_USER</code></td>
+</tr>
+<tr>
+<td><strong>Deployment SSH private key</strong> → <code>ssh_private_key.pem</code></td>
+<td><code>SSH_KEY</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<hr>
+<ol start="12">
+<li>
+<p>On the details page, click <strong>Download</strong> under <strong>Deployment SSH private key</strong>.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/14d067c0-cf7d-4f6a-a73f-5735ef01589a/user_cropped_screenshot_8866997a1d354ebfa97b22ad5f719cea_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/14d067c0-cf7d-4f6a-a73f-5735ef01589a/user_cropped_screenshot_8866997a1d354ebfa97b22ad5f719cea_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="13">
+<li>
+<p>Click <strong>Show ssh_private_key.pem</strong> to reveal the downloaded file.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/3be19ee0-faca-4c09-8c95-3d1b9c81cf9a/user_cropped_screenshot_ec1e8a71bd0741a693941266066622c3_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/3be19ee0-faca-4c09-8c95-3d1b9c81cf9a/user_cropped_screenshot_ec1e8a71bd0741a693941266066622c3_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="14">
+<li>Move the <code>.pem</code> file <strong>into your lab folder</strong>, so that the <code>SSH_KEY</code> path used later in the lab can be given as <code>./ssh_private_key.pem</code>.</li>
+</ol>
+<hr>
+<ol start="15">
+<li>
+<p>The lab folder now shows the key alongside the starter files.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/95c5d8af-be60-4dfe-b76e-0c0ff62c0544/user_cropped_screenshot_24478fa0509140a0b62fae3a926bafec_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/95c5d8af-be60-4dfe-b76e-0c0ff62c0544/user_cropped_screenshot_24478fa0509140a0b62fae3a926bafec_text_export.jpeg" alt="" width="600"></a>
+</p>
+<p>Then lock down its permissions. This <code>.pem</code> file is effectively the password to your server, so it should be readable by you and nobody else. SSH enforces this: if the file is readable by other accounts on your laptop, it refuses to use the key and the connection fails with an "UNPROTECTED PRIVATE KEY FILE" warning. The command below makes you the only one who can read or edit it. Run it in the Bob IDE terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>ssh_private_key.pem
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">RESERVATIONS EXPIRE</p>
+<p>When the reservation ends, the VSI is <strong>deleted</strong> — along with anything deployed on it. That is fine for this lab (the entire stack rebuilds from code), but extend the reservation from the details page if you need the environment longer.</p>
+</div>
+</li>
+</ol>
+<hr>
+<h2 id="iii-software-configuration"><strong>iii. SOFTWARE CONFIGURATION</strong></h2>
+<p>The hands-on lab you are embarking on requires that several open source tools and drivers are available on your personal (local) machine. Many of these have become ubiquitous parts of our day-to-day as technology sellers and practitioners — so it's likely you have some (if not all) of these already configured on your local machine. Ensure that you have <em>all</em> of these components configured before advancing to <strong>section iv</strong>. There is a verification and validation step at the end of this section (<strong>iii.</strong>) that you can leverage to sanity-check everything is working before advancing.</p>
+<hr>
+<h3 id="required-software"><strong>Required software</strong></h3>
+<p>You will require the following tools and technologies on your local machine. Instructions on acquiring and configuring each of them are detailed in the pages below.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Minimum Version</th>
+<th>Purpose</th>
+<th>Installation Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bob IDE</strong></td>
+<td>Latest</td>
+<td>Infrastructure code generation</td>
+<td>Download from IBM</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>&gt;= 3.8</td>
+<td>Required for Ansible</td>
+<td>System package manager</td>
+</tr>
+<tr>
+<td><strong>Terraform</strong></td>
+<td>&gt;= 1.6</td>
+<td>Infrastructure provisioning</td>
+<td>See below</td>
+</tr>
+<tr>
+<td><strong>Ansible</strong></td>
+<td>&gt;= 2.15</td>
+<td>Configuration management</td>
+<td>pip install</td>
+</tr>
+<tr>
+<td><strong>SSH Client</strong></td>
+<td>Any</td>
+<td>Remote server access</td>
+<td>Pre-installed (most systems)</td>
+</tr>
+<tr>
+<td><strong>curl</strong></td>
+<td>Any</td>
+<td>API testing</td>
+<td>Pre-installed (most systems)</td>
+</tr>
+<tr>
+<td><strong>GNU make</strong></td>
+<td>Any</td>
+<td>Automation scripts</td>
+<td>System package manager</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="installing-terraform"><strong>Installing Terraform</strong></h3>
+<p>Follow the instruction set that matches your local machine's operating system.</p>
+<p><strong>macOS (Homebrew):</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>brew<span class="w"> </span>tap<span class="w"> </span>hashicorp/tap
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>brew<span class="w"> </span>install<span class="w"> </span>hashicorp/tap/terraform
+</code></pre></div>
+<p><strong>Linux (Ubuntu/Debian):</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>terraform
+</code></pre></div>
+<p><strong>Windows (Chocolatey):</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">choco</span> <span class="n">install</span> <span class="n">terraform</span>
+</code></pre></div>
+<p><strong>Alternative (Direct Download):</strong>
+Download from <a href="https://www.terraform.io/downloads" target="_blank">terraform.io/downloads</a> and add to PATH.</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>terraform: command not found</code></summary>
+<p><strong>Cause</strong> — Terraform is not installed or not on the <code>PATH</code>.</p>
+<p><strong>Fix:</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># macOS with Homebrew</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>brew<span class="w"> </span>install<span class="w"> </span>terraform
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Ubuntu/Debian</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>terraform
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Verify installation</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>which<span class="w"> </span>terraform
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>terraform<span class="w"> </span>version
+</code></pre></div>
+</details>
+<hr>
+<h3 id="installing-ansible"><strong>Installing Ansible</strong></h3>
+<p>Ansible is installed via Python's pip package manager. Use the Bob IDE terminal or your system terminal:</p>
+<p><strong>Install Ansible using pip:</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Ensure pip is up to date</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Install Ansible</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ansible
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Verify installation</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>ansible<span class="w"> </span>--version
+</code></pre></div>
+<p><strong>Expected output:</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ansible [core 2.15.x]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  config file = None
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  configured module search path = [...]
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  ansible python module location = [...]
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  executable location = /usr/local/bin/ansible
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  python version = 3.x.x
+</code></pre></div>
+<p><strong>Alternative: Install with additional tools:</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Install Ansible with commonly used collections</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ansible<span class="w"> </span>ansible-lint
+</code></pre></div>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>pip: command not found</code></summary>
+<p><strong>Cause</strong> — Python 3 / pip is not installed on the laptop.</p>
+<p><strong>Fix:</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># macOS</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>brew<span class="w"> </span>install<span class="w"> </span>python3
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Ubuntu/Debian</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3<span class="w"> </span>python3-pip
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># Verify</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>python3<span class="w"> </span>--version
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>--version
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: Ansible fails to install, or <code>ansible: command not found</code> afterwards</summary>
+<p><strong>Cause</strong> — a system-wide pip install needs permissions you do not have, or pip's user bin directory is not on your <code>PATH</code>.</p>
+<p><strong>Fix</strong> — install into your user environment and put its bin directory on the PATH:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>ansible
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Add to ~/.bashrc or ~/.zshrc</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Reload shell</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc<span class="w">  </span><span class="c1"># or source ~/.zshrc</span>
+</code></pre></div>
+</details>
+<hr>
+<h3 id="validation-and-verification-checks"><strong>Validation and verification checks</strong></h3>
+<p>Run these commands in the Bob IDE terminal to verify your setup:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Check Python</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>python3<span class="w"> </span>--version
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Check Terraform</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>terraform<span class="w"> </span>version
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># Check Ansible</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>ansible<span class="w"> </span>--version
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1"># Check SSH</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>ssh<span class="w"> </span>-V
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="c1"># Check curl</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>curl<span class="w"> </span>--version
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="c1"># Check make</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>make<span class="w"> </span>--version
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">EXPECTED RESULTS</p>
+<ul>
+<li>All commands return version information — no "command not found" errors</li>
+<li>Terraform &gt;= 1.6</li>
+<li>Ansible &gt;= 2.15</li>
+</ul>
+</div>
+<hr>
+<h2 id="iv-workspace-configuration"><strong>iv. WORKSPACE CONFIGURATION</strong></h2>
+<div class="admonition warning">
+<p class="admonition-title">DOWNLOAD: Lab source files</p>
+<p>If you want to maintain a local copy of the original lab's source files on your local machine, you can do so (without a GitHub account) by downloading the following ZIP repository from Seismic.</p>
+<p><strong>URL: <a href="https://ibm.seismic.com/Link/Content/DChBRPJQVJQTJ8QPbp688qpPHXDd" target="_blank">https://ibm.seismic.com/Link/Content/DChBRPJQVJQTJ8QPbp688qpPHXDd</a></strong></p>
+</div>
+<p>The entire hands-on lab you are embarking on runs inside the <strong>Bob IDE</strong>, with the lab folder open as your workspace. You prompt Bob, run commands, and review generated code there. This section (<strong>iv.</strong>) ensures that the Bob IDE <strong>Workspace</strong> is properly configured before you begin.</p>
+<hr>
+<h3 id="launch-bob-ide"><strong>Launch Bob IDE</strong></h3>
+<ol>
+<li>
+<p>Open your computer's search.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/92ea3bb2-c366-407f-a6d8-dc6f8097ece1/user_cropped_screenshot_50aed8bf63ee4e569a17782f336d704f_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/92ea3bb2-c366-407f-a6d8-dc6f8097ece1/user_cropped_screenshot_50aed8bf63ee4e569a17782f336d704f_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>
+<p>Search for IBM Bob and open it.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/6a39b27c-f79e-4288-b4fb-b33dd3bf6ccf/user_cropped_screenshot_c258a4c577404442aae5b0a4ba363491_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/6a39b27c-f79e-4288-b4fb-b33dd3bf6ccf/user_cropped_screenshot_c258a4c577404442aae5b0a4ba363491_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="open-the-lab-folder"><strong>Open the lab folder</strong></h3>
+<ol start="3">
+<li>
+<p>On the welcome screen, click <strong>Open</strong> to browse for a workspace folder.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/4fe9b8cc-16ca-4802-a64b-c30f0bcb61d3/user_cropped_screenshot_40b9d7969a6e4ea6a4473ea0fdb7680d_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/4fe9b8cc-16ca-4802-a64b-c30f0bcb61d3/user_cropped_screenshot_40b9d7969a6e4ea6a4473ea0fdb7680d_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li>
+<p>Navigate to the DevOps-Ansible-and-Terraform folder.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/29b26148-34c1-475a-b3c3-9d9dc9223603/user_cropped_screenshot_23f84e9274cf4d0ab81cdbb1d69393da_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/29b26148-34c1-475a-b3c3-9d9dc9223603/user_cropped_screenshot_23f84e9274cf4d0ab81cdbb1d69393da_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="5">
+<li>
+<p>Click <strong>Open</strong>.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/afeaa5f6-c5aa-4c6f-8827-dbc3e0f328d2/user_cropped_screenshot_c176c7e150874590840ae29abbb18801_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/afeaa5f6-c5aa-4c6f-8827-dbc3e0f328d2/user_cropped_screenshot_c176c7e150874590840ae29abbb18801_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="6">
+<li>
+<p>Bob IDE asks whether you trust the authors of the folder. It is your own lab folder, so confirm.</p>
+<div class="admonition warning">
+<p class="admonition-title">PUT THE LAB FOLDER SOMEWHERE WITH NO SPACES IN THE PATH</p>
+<p>A folder named <code>IBM BOB DEV OPS</code> (or any parent directory with a space) breaks Ansible's INI inventory, which splits host lines on whitespace. The failure is easy to miss: the inventory silently fails to parse, and Ansible falls back to <strong>implicit localhost</strong>. Every task then runs against your laptop instead of the server: templates render into your local <code>/tmp</code>, and the playbook appears to hang.</p>
+<p>Use a path like <code>~/labs/bob-devops</code> instead. If you must keep a space, every inventory value holding a path has to be double-quoted, and any tool that reads it needs the same care.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/cbbb88f8-628c-4c16-9d3d-acb1654da30e/user_cropped_screenshot_ba886ae266a34de68ebc91e83fe2e26a_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/cbbb88f8-628c-4c16-9d3d-acb1654da30e/user_cropped_screenshot_ba886ae266a34de68ebc91e83fe2e26a_text_export.jpeg" alt="" width="600"></a>
+</p>
+</div>
+</li>
+</ol>
+<hr>
+<h3 id="confirm-the-workspace"><strong>Confirm the workspace</strong></h3>
+<ol start="7">
+<li>
+<p>The file explorer on the left should now show the three starter files. The folder is intentionally almost empty, since Bob generates everything else during Module 1:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>LAB/
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>├── README.md
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>├── WORKSHOP-part1-IDE.md
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>└── WORKSHOP-part2-CLI.md
+</code></pre></div>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/342564b4-2cda-49d8-a8bb-b9a526831881/user_cropped_screenshot_f13e60d35e584da5b44b57ab8d56a30d_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/342564b4-2cda-49d8-a8bb-b9a526831881/user_cropped_screenshot_f13e60d35e584da5b44b57ab8d56a30d_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="open-the-integrated-terminal"><strong>Open the integrated terminal</strong></h3>
+<ol start="8">
+<li>
+<p>From the menu bar, click <strong>Terminal → New Terminal</strong> (or press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-grave">`</kbd></span> / <span class="keys"><kbd class="key-command">Cmd</kbd><span>+</span><kbd class="key-grave">`</kbd></span>).</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/2bbab782-9401-44cd-a5ba-ae57ce01d86a/user_cropped_screenshot_a63fac70953947608efe67c2a2152005_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/2bbab782-9401-44cd-a5ba-ae57ce01d86a/user_cropped_screenshot_a63fac70953947608efe67c2a2152005_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<ol start="9">
+<li>
+<p>A terminal panel opens at the bottom, already inside the lab folder.</p>
+<p>Every command in this guide runs in this terminal, from the installs and environment variables to the SSH tests. That way it inherits the folder and the variables that Bob works with.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/6bb2db70-753c-4c7b-a0cb-11ecbfbaf401/user_cropped_screenshot_9ff8033a2dff481396b2ee97c1979b50_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/6bb2db70-753c-4c7b-a0cb-11ecbfbaf401/user_cropped_screenshot_9ff8033a2dff481396b2ee97c1979b50_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<hr>
+<h3 id="check-the-bob-settings"><strong>Check the Bob settings</strong></h3>
+<p>Open Bob's chat sidebar and set it up the way the lab expects before you prompt anything:</p>
+<ol start="10">
+<li>
+<p><strong>Switch Bob to Plan mode.</strong> Module 1 starts in Plan mode. Bob proposes the design first, and you switch to Agent mode only when it is time to write files, so nothing is created until you have reviewed the plan.</p>
+<ol>
+<li>
+<p>At the bottom right of the screen, locate the agent selection.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/a384c78b-9885-44a0-96f1-3aa14d237df3/user_cropped_screenshot_b89d48e071454a10ba8f417710ce5b60_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/a384c78b-9885-44a0-96f1-3aa14d237df3/user_cropped_screenshot_b89d48e071454a10ba8f417710ce5b60_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+<li>
+<p>Bob is now in Plan mode.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/bce0ea0a-0d16-45dc-8440-10c309c94864/user_cropped_screenshot_b960b59b492b47b99b854599f3833c1a_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/bce0ea0a-0d16-45dc-8440-10c309c94864/user_cropped_screenshot_b960b59b492b47b99b854599f3833c1a_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<ol start="11">
+<li><strong>Leave any auto-approve / autonomous-agent toggle off.</strong> Bob IDE offers a mode in which Bob applies changes or runs commands without asking. Keep it disabled for this lab.</li>
+</ol>
+<hr>
+<ol start="12">
+<li>
+<p><strong>Find the "sparkle" icon (prompt enhancement).</strong> It sits on the chat box at the bottom right and needs no configuration at this stage. Module 1 uses it to expand a short prompt into a detailed one before sending.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/097138a5-5ccc-492b-80c4-f0b654e341a7/user_cropped_screenshot_6061087d837c408b9dfcc4f097ea922f_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/097138a5-5ccc-492b-80c4-f0b654e341a7/user_cropped_screenshot_6061087d837c408b9dfcc4f097ea922f_text_export.jpeg" alt="" width="600"></a>
+</p>
+<details class="warning">
+<summary>TROUBLESHOOTING: No "sparkle" icon within the chat box</summary>
+<p>Prompt enhancement is turned off. Enable it:</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/7578a9ee-9b0f-4a46-ae42-b0d7cfb4485b/user_cropped_screenshot_077c473abdda4e32b04a7d14629ab256_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/7578a9ee-9b0f-4a46-ae42-b0d7cfb4485b/user_cropped_screenshot_077c473abdda4e32b04a7d14629ab256_text_export.jpeg" alt="" width="600"></a>
+</p>
+<ol>
+<li>
+<p>At the bottom right of the screen, click Bob settings.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/799e5c6a-3044-4ead-8ac7-b4fd72d80996/user_cropped_screenshot_d082ced6e36b491a9e56962f8f7596cd_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-07-31/799e5c6a-3044-4ead-8ac7-b4fd72d80996/user_cropped_screenshot_d082ced6e36b491a9e56962f8f7596cd_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+<li>
+<p>Click the <strong>Chat</strong> section on the settings page.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/423dc9f0-5308-4e75-8b60-a7f11b4e559c/user_cropped_screenshot_63961b96ccf741f3a80743f7beb9089b_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/423dc9f0-5308-4e75-8b60-a7f11b4e559c/user_cropped_screenshot_63961b96ccf741f3a80743f7beb9089b_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+<li>
+<p>Scroll to the bottom of the page and locate the <strong>Prompt enhancement</strong> section.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/0d30431a-4b21-4bee-bb82-cbd6138da0b4/user_cropped_screenshot_c5188d015d8943e89384c5eba4315d62_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/0d30431a-4b21-4bee-bb82-cbd6138da0b4/user_cropped_screenshot_c5188d015d8943e89384c5eba4315d62_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+<li>
+<p>Turn on <strong>Prompt enhancement</strong>.</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/8c99b4cf-9b9f-4f6d-a368-cd1b850925d0/user_cropped_screenshot_5a8da212c707470d98e3ecafc28c06ce_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-01/8c99b4cf-9b9f-4f6d-a368-cd1b850925d0/user_cropped_screenshot_5a8da212c707470d98e3ecafc28c06ce_text_export.jpeg" alt="" width="600"></a>
+</p>
+</li>
+</ol>
+<p>The sparkle icon now shows on the chat box.</p>
+</details>
+</li>
+</ol>
+<hr>
+<h2 id="v-connecting-to-the-server"><strong>v. CONNECTING TO THE SERVER</strong></h2>
+<div class="admonition info">
+<p class="admonition-title">ATTENTION: WAIT UNTIL RESERVATION IS MARKED <code>READY</code></p>
+<p>Before attempting this section (<strong>v.</strong>), <strong>wait</strong> until you receive confirmation from IBM Technology Zone that your requested environment is <code>READY</code>. This will arrive both as an email to your inbox and as a status update on ITZ's <em>My requests</em> dashboard.</p>
+</div>
+<p>With your local machine properly configured with the necessary tools and the Bob IDE Workspace prepared, it's now time to establish a connection between Bob IDE (locally) and the server reservation placed earlier from IBM Technology Zone (remotely).</p>
+<hr>
+<h3 id="set-environment-variables"><strong>Set environment variables</strong></h3>
+<ol>
+<li>
+<p>Before running any commands, have these five values in front of you. The first four come from the environment details page you opened earlier (or your own server's equivalents):</p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d447c367-9a25-4d17-ad1d-101fc6599c6d/user_cropped_screenshot_43ca71a642ce40ddb3f1a892f0e8336d_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/d447c367-9a25-4d17-ad1d-101fc6599c6d/user_cropped_screenshot_43ca71a642ce40ddb3f1a892f0e8336d_text_export.jpeg" alt="" width="600"></a>
+</p>
+<ul>
+<li><strong>Public IP address</strong> — of the server.</li>
+<li><strong>SSH username</strong> — Technology Zone reservations typically use <code>itzuser</code>.</li>
+<li><strong>SSH port</strong> — often non-standard on Technology Zone (e.g. <code>2223</code>); usually <code>22</code> on other servers.</li>
+<li><strong>Path to the downloaded SSH key file</strong> — <code>./ssh_private_key.pem</code>, since you moved it into the lab folder earlier.</li>
+<li><strong>A Grafana admin password</strong> — this one you invent yourself. Pick something strong; it becomes your Grafana login later in the lab.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>
+<p>Paste each value into its command below, then <strong>run them in the Bob IDE terminal:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TARGET_HOST</span><span class="o">=[</span>paste<span class="w"> </span>public<span class="w"> </span>IP<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_USER</span><span class="o">=[</span>paste<span class="w"> </span>SSH<span class="w"> </span>username<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_PORT</span><span class="o">=[</span>paste<span class="w"> </span>SSH<span class="w"> </span>port<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_KEY</span><span class="o">=[</span>paste<span class="w"> </span>path<span class="w"> </span>to<span class="w"> </span>SSH<span class="w"> </span>key<span class="w"> </span>file<span class="w"> </span>here<span class="o">]</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_VAR_grafana_admin_password</span><span class="o">=</span><span class="s1">'[type your chosen Grafana password here]'</span>
+</code></pre></div>
+<details class="info">
+<summary>NOT SURE YOU FILLED THEM IN CORRECTLY? A COMPLETED SET LOOKS LIKE THIS</summary>
+<p>These are sample values from an expired reservation — <strong>do not copy them</strong>, as they will not work. They are here only so you can compare the <em>shape</em> of your values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TARGET_HOST</span><span class="o">=</span><span class="m">150</span>.240.70.220
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_USER</span><span class="o">=</span>itzuser
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_PORT</span><span class="o">=</span><span class="m">2223</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_KEY</span><span class="o">=</span>./ssh_private_key.pem
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_VAR_grafana_admin_password</span><span class="o">=</span><span class="s1">'Workshop!2026'</span>
+</code></pre></div>
+</details>
+</li>
+</ol>
+<hr>
+<h3 id="test-ssh-connectivity"><strong>Test SSH connectivity</strong></h3>
+<ol start="3">
+<li>
+<p>Verify you can connect to the remote server with passwordless <code>sudo</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span><span class="w"> </span><span class="s1">'sudo -n true &amp;&amp; echo ok'</span>
+</code></pre></div>
+<p><strong>Expected output:</strong> <code>ok</code></p>
+<p></p><p align="left">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/f015baab-415b-4fcc-a431-1c71c80349d0/user_cropped_screenshot_d6e3cd77912c450b883037b4c6e70da7_text_export.jpeg" data-desc-position="bottom"><img src="https://colony-recorder.s3.amazonaws.com/files/2026-08-02/f015baab-415b-4fcc-a431-1c71c80349d0/user_cropped_screenshot_d6e3cd77912c450b883037b4c6e70da7_text_export.jpeg" alt="" width="600"></a>
+</p>
+<div class="admonition failure">
+<p><strong>If this fails, review:</strong></p>
+<ul>
+<li>SSH key permissions are <code>600</code></li>
+<li>SSH key is authorized on the remote server</li>
+<li>User has passwordless sudo configured</li>
+<li>Firewall allows SSH on the specified port</li>
+</ul>
+</div>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>Permission denied (publickey)</code></summary>
+<p><strong>Cause</strong>: the key file is either too permissive (SSH refuses loose keys) or not the key the server expects.</p>
+<p><strong>Fix:</strong>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Verify key permissions, must show -rw------- (600)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>ls<span class="w"> </span>-la<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c1"># Verify the key is a private key at all</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>head<span class="w"> </span>-1<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Should start with: -----BEGIN RSA PRIVATE KEY----- or similar</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: cannot reach the remote server over SSH</summary>
+<p><strong>Cause</strong> — wrong host/port, the reservation is not Ready yet, or a network path problem.</p>
+<p><strong>Fix</strong> — narrow it down layer by layer:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Test basic connectivity</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>ping<span class="w"> </span><span class="nv">$TARGET_HOST</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Test the SSH port specifically</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>nc<span class="w"> </span>-zv<span class="w"> </span><span class="nv">$TARGET_HOST</span><span class="w"> </span><span class="nv">$SSH_PORT</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1"># Verbose SSH connection — read the last lines before the failure</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>ssh<span class="w"> </span>-v<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SSH_KEY</span><span class="s2">"</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$SSH_PORT</span><span class="w"> </span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>@<span class="si">${</span><span class="nv">TARGET_HOST</span><span class="si">}</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>TROUBLESHOOTING: <code>sudo -n true</code> asks for a password</summary>
+<p><strong>Cause</strong> — the SSH user does not have passwordless sudo. (The Technology Zone VSI comes with it preconfigured — this mainly affects bring-your-own servers.)</p>
+<p><strong>Fix</strong> — configure it on the remote server:
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># On the remote server:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span><span class="s2"> ALL=(ALL) NOPASSWD:ALL"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sudoers.d/<span class="si">${</span><span class="nv">SSH_USER</span><span class="si">}</span>
+</code></pre></div>
+</details>
+</li>
+</ol>
+<hr>
+<h2 id="vi-troubleshooting"><strong>vi. TROUBLESHOOTING</strong></h2>
+<p>If you encounter issues during setup:</p>
+<ol>
+<li>Expand the <strong>Troubleshooting</strong> dropdowns under the step you are stuck on. Each known failure and its fix sits directly beneath the instruction that triggers it.</li>
+<li>Check the <a href="../architecture/" target="_blank">Reference Documentation</a>.</li>
+<li>Verify all environment variables are set correctly.</li>
+<li>Ensure SSH connectivity before proceeding.</li>
+<li>Confirm all tools are installed and in PATH.</li>
+</ol>
+<ul>
+<li><a href="https://www.terraform.io/docs" target="_blank">Terraform Documentation</a></li>
+<li><a href="https://docs.ansible.com/" target="_blank">Ansible Documentation</a></li>
+<li><a href="https://www.ssh.com/academy/ssh/tunneling" target="_blank">SSH Tunneling Guide</a></li>
+<li><a href="https://docs.rancherdesktop.io/" target="_blank">Rancher Desktop documentation</a> — the reference for the engine itself: installing it, running it headless, and its VM settings</li>
+<li><a href="https://pip.pypa.io/en/stable/" target="_blank">Python pip Documentation</a></li>
+</ul>
+<hr>
+<h2 id="vii-ready-to-proceed"><strong>vii. READY TO PROCEED</strong></h2>
+<p>Setup is complete. Bob IDE is open on the lab folder with the tools installed, the server is reserved, and the SSH connection is verified. You are ready to begin the hands-on work and watch Bob design and build infrastructure as it would within a client's real project.</p>
+<p>Before proceeding to <a href="../1-1/" target="_blank">Module 1 | Design</a>, verify all items below:</p>
+<div class="admonition success">
+<ul>
+<li>Technology Zone reservation in <strong>Ready</strong> status</li>
+<li>SSH key (<code>.pem</code>) downloaded from the reservation page</li>
+<li>Bob IDE installed and authenticated</li>
+<li>Lab folder opened in Bob IDE</li>
+<li>Terminal accessible in Bob IDE</li>
+<li>Python &gt;= 3.8 installed</li>
+<li>Terraform &gt;= 1.6 installed</li>
+<li>Ansible &gt;= 2.15 installed (via pip)</li>
+<li>SSH client available</li>
+<li>Environment variables configured in terminal</li>
+<li>SSH key has correct permissions (chmod 600)</li>
+<li>SSH connectivity to remote server verified</li>
+<li><code>TF_VAR_grafana_admin_password</code> set</li>
+</ul>
+</div>
+<p>Proceed to <a href="../1-1/" target="_blank">Module 1 | Design</a>, where you hand Bob a one-paragraph requirement and review the architecture it proposes.</p>
+<hr></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../1-1/" class="md-footer__link md-footer__link--next" aria-label="Next: Architecture and Planning">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Architecture and Planning
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2026 IBM
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.annotate", "content.code.copy", "content.code.select", "navigation.footer"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+        <script src="../_static/hide-toc-nav.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

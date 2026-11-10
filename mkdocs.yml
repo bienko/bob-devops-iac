@@ -1,0 +1,96 @@
+# Project info
+site_name: DevOps Infrastructure as Code with IBM Bob
+site_description: DevOps Infrastructure as Code with IBM Bob
+site_author: Christopher Bienko (cdbienko@us.ibm.com)
+copyright: Copyright &copy; 2026 IBM
+
+# Repository
+repo_name: bienko/bob-devops-iac
+#repo_url: https://github.com/bienko/bob-devops-iac
+#edit_uri: edit/master/docs
+docs_dir: docs
+
+nav:
+  - Table of Contents: toc.md
+  - Introduction: 'index.md'
+  - Registration and Setup: 'setup.md'
+  - 1. Design:
+    - Architecture and Planning: 1-1.md
+    - Validation and Enhancement: 1-2.md
+  - 2. Deploy:
+    - Automated Deployment: 2-1.md
+    - Testing and Troubleshooting: 2-2.md
+  - 3. Operate:
+    - Monitoring and Observability: 3-1.md
+    - Self-Healing and Recovery: 3-2.md
+  - Reference:
+    - Platform Architecture: architecture.md
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - navigation.footer
+  palette:
+      scheme: default
+
+plugins:
+  - mkdocs-video:
+      is_video: True
+      video_autoplay: False
+  - macros
+  - search
+  - glightbox
+  - print-site:
+      add_to_navigation: false
+      print_page_title: 'DevOps Infrastructure as Code with IBM Bob'
+      add_print_site_banner: false
+      # Table of contents
+      add_table_of_contents: false
+      toc_title: 'Table of Contents'
+      toc_depth: 6
+      # Content-related
+      add_full_urls: false
+      enumerate_headings: false
+      enumerate_figures: false
+      add_cover_page: false
+      cover_page_template: ""
+      path_to_pdf: ""
+      include_css: true
+      enabled: true
+
+markdown_extensions:
+  - sane_lists
+  - pymdownx.details
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.keys
+  - attr_list
+  - md_in_html
+  - def_list
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - tables
+  - pymdownx.tabbed
+
+extra_css:
+  - styles/override-print.css
+
+extra_javascript:
+  - _static/hide-toc-nav.js
