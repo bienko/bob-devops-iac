@@ -47,9 +47,7 @@ The first order of business will be booking an Ubuntu server image **via [IBM Te
 
 ---
 
-4. *Step 2: Business purpose* must be set to **Test** in order to bypass the need for an opportunity number. If you mistakenly click the wrong option, or if the reservation system does not allow you to continue without an opportunity number, exit out from this page and try again (making sure to only click *Test*). When ready, click **Next** to continue.
-
-    ![](_attachments/setup-ubuntu-3.png){ width="600" }
+4. *Step 2: Business purpose* should be set to **Learning**. When ready, click **Next** to continue.
 
 ---
 
